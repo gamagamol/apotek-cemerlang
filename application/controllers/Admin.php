@@ -11,7 +11,7 @@ class Admin extends CI_Controller {
     $this->cek_login();
   }
 
-  // Custom Function
+  // Custom Function bebas
   function cek_login() {
     if ($this->session->login === null) {
       redirect("auth");
