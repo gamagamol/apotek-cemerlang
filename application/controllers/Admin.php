@@ -5,13 +5,13 @@ class Admin extends CI_Controller {
 
   public function __construct() {
     parent::__construct();
-
     $this->load->model('apotek_models');
     $this->clear_cache();
     $this->cek_login();
   }
 
-  // Custom Function bebas
+  // Custom Function apotek
+  // test
   function cek_login() {
     if ($this->session->login === null) {
       redirect("auth");
@@ -40,14 +40,7 @@ class Admin extends CI_Controller {
     $this->load->view('module/footer');
   }
 
-  public function drugs() {
-    $data['title'] = 'Admin | Obat';
-    $data['drugs'] = $this->apotek_models->get_data_query('select drugs.*, drugs.name as dname, drugs.id as did, units.name as uname, units.id as uid, units.* from drugs inner join units on drugs.id_unit = units.id')->result();
-    $data['bc'] = 'Data Master / Obat';
-    $this->load->view('module/header', $data);
-    $this->load->view('admin/drugs', $data);
-    $this->load->view('module/footer');
-  }
+
 
   public function purchases() {
     $data['title'] = 'Admin | Pembelian';
@@ -167,28 +160,6 @@ class Admin extends CI_Controller {
 
 
   // ADD DATA
-  public function add_drug() {
-    $kode_obat = $this->input->post("kode_obat");
-    $nama_obat = $this->input->post("nama_obat");
-    $id_unit = $this->input->post("satuan");
-    $harga_beli = $this->input->post("harga_beli");
-    $harga_jual = $this->input->post("harga_jual");
-    $satuan = $this->input->post("satuan");
-
-    $arr = [
-      "id" => null,
-      "kode_obat" => $kode_obat,
-      "name" => $nama_obat,
-      "id_unit" => $id_unit,
-      "stock" => 0,
-      "purchase_price" => $harga_beli,
-      "selling_price" => $harga_jual
-    ];
-
-    $this->db->insert("drugs", $arr);
-    $this->session->set_flashdata("msg", "<div class='alert alert-success'>Obat baru dengan nama ". $nama_obat. " dan kode ". $kode_obat. " ditambahkan</div>");
-    redirect("admin/drugs");
-  }
   public function add_purchase() {
     $invoice_num = $this->input->post("invoice_num");
     $id_obat = $this->input->post("id_obat");
@@ -358,24 +329,6 @@ class Admin extends CI_Controller {
   }
 
   // EDIT DATA
-  public function editdrug() {
-    $id_obat = $this->input->post("id_obat");
-    $kode_obat = $this->input->post("kode_obat");
-    $nama_obat = $this->input->post("nama_obat");
-    $id_unit = $this->input->post("satuan");
-    $harga_beli = $this->input->post("harga_beli");
-    $harga_jual = $this->input->post("harga_jual");
-
-    $this->db->where("id", $id_obat);
-    $this->db->update("drugs", [
-      "name" => $nama_obat,
-      "id_unit" => $id_unit,
-      "purchase_price" => $harga_beli,
-      "selling_price" => $harga_jual
-    ]);
-    $this->session->set_flashdata("msg", "<div class='alert alert-success'>Data berhasil diperbarui! </div>");
-    redirect("admin/drugs");
-  }
 
   public function editdebt() {
     $no_debt = $this->input->post("no_debt");
@@ -477,11 +430,6 @@ class Admin extends CI_Controller {
   }
 
   // DELETE DATA
-  public function deletedrug($id) {
-    $this->db->delete("drugs", ["id" => $id]);
-    $this->session->set_flashdata("msg", "<div class='alert alert-success'>Obat berhasil dihapus!</div>");
-    redirect("admin/drugs");
-  }
 
   public function deletedebt($id) {
     $this->db->delete("debt", ["id" => $id]);

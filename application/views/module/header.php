@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,5 +20,14 @@
   <link rel="stylesheet" href="<?= base_url() ?>/assets/dist/css/adminlte.min.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+  <!-- jQuery -->
+  <script src="<?= base_url() ?>/assets/plugins/jquery/jquery-3.5.1.min.js"></script>
+  <script src="<?= base_url() ?>/assets/plugins/jquery-print/jQuery.print.js"></script>
+  <!-- Bootstrap 4 -->
+  <script src="<?= base_url() ?>/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="<?= base_url() ?>/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+  <!-- AdminLTE App -->
+  <script src="<?= base_url() ?>/assets/dist/js/adminlte.min.js"></script>
 </head>
 <?= current_url() == base_url() || current_url() == base_url("auth") ? '<body class="hold-transition login-page">' : '<body class="hold-transition sidebar-mini"><div class ="wrapper">' ?>

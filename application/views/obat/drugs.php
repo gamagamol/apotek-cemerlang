@@ -12,12 +12,10 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Data Obat</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item active">
-              <?= $bc ?>
             </li>
           </ol>
         </div>
@@ -28,57 +26,65 @@
 
   <!-- Main content -->
   <section class="content">
-    <?= $this->session->flashdata("msg") ?>
     <!-- Default box -->
-    <div class="card">
-      <div class="card-header">
-        <h3 class="card-title">Tabel</h3>
-      </div>
-      <div class="card-body">
-        <div class="row">
-          <div class="col">
-            <button class="btn btn-primary btn-sm btn-flat" data-toggle="modal" data-target="#add-drug">Tambah</button>
-            &nbsp;
+    <div class="container">
+      <div class="card shadow mb-4">
+        <div class="card-header py-3 mt-2">
+          <h6 class="m-0 font-weight-bold ">Data Obat</h6>
+        </div>
+
+        <form action="{{ url('COA') }}" method="get">
+          <div class="form-group col-md-6 ml-2 mt-2">
+            <select name="cari" id="" class="form-control">
+
+            </select>
+          </div>
+          <button type=submit name=submit class="btn btn-primary ml-4">submit</button>
+        </form>
+
+
+
+        <div class="card-body">
+          <?= $this->session->flashdata("msg") ?>
+
+          <a href="#" class="btn btn-primary ml-1 mt-3 mb-3" id="tambah"> <i class="fas fa-plus-circle me-1  " style="letter-spacing: 2px"></i> Tambah </a>
+          <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+              <tr class="text-center">
+                <th>No.</th>
+                <th>Kode</th>
+                <th>Nama</th>
+                <th>Satuan</th>
+                <th>Stok</th>
+                <th>Aksi</th>
+              </tr>
+              <?php
+              $no = 1;
+
+              ?>
+              <?php foreach ($data as $d) : ?>
+                <tr class="text-center">
+                  <td><?= $no ?></td>
+                  <td> <?= $d->kode_obat ?> </td>
+                  <td> <?= $d->name ?> </td>
+                  <td> <?= $d->satuan ?> </td>
+                  <td> <?= $d->stock ?> </td>
+                  <td>
+                    <a href="#" class="btn btn-warning" onclick="edit(<?= $d->id_obat ?>)"> Edit</a>
+                  </td>
+
+                </tr>
+                <?php
+                $no++;
+
+                ?>
+              <?php endforeach; ?>
+
+            </table>
+
           </div>
         </div>
-        <br />
-        <table class="table table-bordered table-hover table-responsive" id="table">
-          <thead>
-            <tr>
-              <th>No.</th>
-              <th>Kode</th>
-              <th>Nama</th>
-              <th>Stok</th>
-              <th>Harga Beli</th>
-              <th>Harga Jual</th>
-              <th>Satuan</th>
-              <th>Aksi</th>
-            </tr>
-          </thead>
-          <tbody>
-            <?php
-            $no = 1;
-            foreach ($drugs as $d):
-            ?>
-            <tr>
-              <td><?= $no++; ?></td>
-              <td><?= $d->kode_obat; ?></td>
-              <td><?= $d->dname; ?></td>
-              <td><?= number_format($d->stock); ?></td>
-              <td><?= 'Rp. '. number_format($d->purchase_price); ?></td>
-              <td><?= 'Rp. '. number_format($d->selling_price); ?></td>
-              <td><?= $d->uname; ?></td>
-              <td>
-                <a href="#" class="badge badge-primary" data-drug-id="<?= $d->did ?>" data-toggle="modal" data-target="#editdrug"><i class="fa fa-edit"></i></a>
-                <a href="<?= base_url('admin/deletedrug/'. $d->did) ?>" class="badge badge-danger" id="deletedrug" onclick="return confirm('Hapus data ini?')"><i class="fa fa-trash"></i></a>
-              </td>
-            </tr>
-            <?php endforeach; ?>
-          </tbody>
-        </table>
-        <!--</div>-->
       </div>
-      <!-- /.card-body -->
     </div>
     <!-- /.card -->
 
@@ -97,20 +103,11 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="<?= base_url('admin/add_drug') ?>" method="POST">
+      <form action="<?= base_url('obat/insert') ?>" method="POST">
         <div class="modal-body">
           <div class="form-group">
             <label for="addkode_obat">Kode Obat</label>
-            <?php
-            $last_row = $this->db->order_by('id', "desc")
-            ->limit(1)
-            ->get('drugs')
-            ->row();
-            $arrstr = str_split($last_row->kode_obat);
-            $last = number_format($arrstr[2]);
-            $laststr = "OB".($last+1);
-            ?>
-            <input type="text" class="form-control" name="kode_obat" id="addkode_obat" value="<?= $laststr; ?>" placeholder="Kode obat... " required>
+            <input type="text" class="form-control" name="kode_obat" id="addkode_obat" value="<?= $lastId; ?>" placeholder="Kode obat... " required readonly>
           </div>
           <div id="adddrugalert"></div>
           <div id="autofilldrug">
@@ -119,22 +116,13 @@
               <input type="text" class="form-control" name="nama_obat" id="addnama_obat" placeholder="Nama obat... " required>
             </div>
             <div class="form-group">
-              <label for="addharga_beli">Harga Beli</label>
-              <input type="number" class="form-control" name="harga_beli" id="addharga_beli" placeholder="Harga beli... " required>
-            </div>
-            <div class="form-group">
-              <label for="addharga_jual">Harga Jual</label>
-              <input type="number" class="form-control" name="harga_jual" id="addharga_jual" placeholder="Harga jual..." required>
-            </div>
-            <div class="form-group">
               <label for="addsatuan">Satuan</label>
               <select name="satuan" id="addsatuan" class="form-control" required>
                 <option value="">-- SATUAN -- </option>
                 <?php
-                $satuan = $this->db->get("units")->result();
-                foreach ($satuan as $s):
+                foreach ($satuan as $s) :
                 ?>
-                <option value="<?= $s->id ?>"><?= $s->name ?></option>
+                  <option value="<?= $s->id ?>"><?= $s->name ?></option>
                 <?php endforeach; ?>
               </select>
             </div>
@@ -160,7 +148,7 @@
           <h5>Edit Data</h5>
         </div>
       </div>
-      <form action="<?= base_url('admin/editdrug') ?>" method="POST">
+      <form action="<?= base_url('obat/update') ?>" method="POST">
         <div class="modal-body">
           <input type="hidden" name="id_obat" id="edtid_obat">
           <div class="form-group">
@@ -171,23 +159,17 @@
             <label for="edtnama_obat">Nama Obat</label>
             <input type="text" class="form-control" name="nama_obat" id="edtnama_obat" placeholder="Nama obat... " required>
           </div>
-          <div class="form-group">
-            <label for="edtharga_beli">Harga Beli</label>
-            <input type="number" class="form-control" name="harga_beli" id="edtharga_beli" placeholder="Harga beli... " required>
-          </div>
-          <div class="form-group">
-            <label for="edtharga_jual">Harga Jual</label>
-            <input type="number" class="form-control" name="harga_jual" id="edtharga_jual" placeholder="Harga jual..." required>
-          </div>
+
+
           <div class="form-group">
             <label for="edtsatuan">Satuan</label>
             <select name="satuan" id="edtsatuan" class="form-control" required>
               <option value="">-- SATUAN -- </option>
               <?php
               $satuan = $this->db->get("units")->result();
-              foreach ($satuan as $s):
+              foreach ($satuan as $s) :
               ?>
-              <option value="<?= $s->id ?>"><?= $s->name ?></option>
+                <option value="<?= $s->id ?>"><?= $s->name ?></option>
               <?php endforeach; ?>
             </select>
           </div>
@@ -200,3 +182,31 @@
     </div>
   </div>
 </div>
+<script>
+  $(document).ready(() => {
+    $('#tambah').click(function() {
+      $('#add-drug').modal('show')
+    })
+
+
+
+  })
+
+  function edit(id) {
+    $.ajax({
+
+      url: ' <?= base_url('obat/getDrugById/') ?>' + id,
+      type: 'GET',
+      dataType: 'json',
+      success: function(data) {
+       
+        $('#edtid_obat').val(data[0].id)
+        $('#edtkode_obat').val(data[0].kode_obat)
+        $('#edtnama_obat').val(data[0].name)
+
+        $('#editdrug').modal('show')
+
+      }
+    })
+  }
+</script>
