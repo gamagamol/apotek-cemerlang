@@ -47,7 +47,7 @@ class satuan extends CI_Controller
         $id = $this->input->post("id");
         $nama = $this->input->post("nama");
       
-
+        // var_dump($_POST);
 
 
         $arr = [

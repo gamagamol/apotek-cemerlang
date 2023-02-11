@@ -40,7 +40,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="<?= base_url('admin/coa') ?>" class="nav-link <?= current_url() === base_url('admin/coa') ? 'active' : null ?>">
+                <a href="<?= base_url('coa') ?>" class="nav-link <?= current_url() === base_url('coa') ? 'active' : null ?>">
                   <i class="far fa-circle nav-icon"></i>
                   <p>COA</p>
                 </a>
@@ -59,7 +59,7 @@
               </li>
 
               <li class="nav-item">
-                <a href="<?= base_url('admin/suppliers') ?>" class="nav-link <?= current_url() === base_url('admin/suppliers') ? 'active' : null ?>">
+                <a href="<?= base_url('suppliers') ?>" class="nav-link <?= current_url() === base_url('supplier/index') ? 'active' : null ?>">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Supplier</p>
                 </a>

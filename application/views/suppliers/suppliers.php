@@ -30,7 +30,7 @@
     <div class="container">
       <div class="card shadow mb-4">
         <div class="card-header py-3 mt-2">
-          <h6 class="m-0 font-weight-bold "><?= $title?></h6>
+          <h6 class="m-0 font-weight-bold "><?= $title ?></h6>
         </div>
 
         <form action="{{ url('COA') }}" method="get">
@@ -53,8 +53,9 @@
               <tr class="text-center">
                 <th>No.</th>
                 <th>Nama</th>
+                <th>hp</th>
+                <th>alamat</th>
                 <th>Aksi</th>
-               
               </tr>
               <?php
               $no = 1;
@@ -64,7 +65,8 @@
                 <tr class="text-center">
                   <td><?= $no ?></td>
                   <td> <?= $d->name ?> </td>
-               
+                  <td> <?= $d->hp ?> </td>
+                  <td> <?= $d->address ?> </td>
                   <td>
                     <a href="#" class="btn btn-warning" onclick="edit(<?= $d->id ?>)"> Edit</a>
                   </td>
@@ -90,22 +92,33 @@
 <!-- /.content-wrapper -->
 
 <!-- modal add drug -->
-<div class="modal fade" id="add-units">
+<div class="modal fade" id="add-drug">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Tambah Satuan</h4>
+        <h4 class="modal-title">Tambah Obat</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="<?= base_url('satuan/insert') ?>" method="POST">
+      <form action="<?= base_url('suppliers/insert') ?>" method="POST">
         <div class="modal-body">
-          <div class="form-group">
-            <label for="addkode_obat">Nama Satuan</label>
-            <input type="text" class="form-control" name="satuan" id="addkode_obat"  placeholder="Nama Satuan... " required >
+          <div id="adddrugalert"></div>
+          <div id="autofilldrug">
+            <div class="form-group">
+              <label for="addnama_obat">Nama Pemasok</label>
+              <input type="text" class="form-control" name="nama" placeholder="Nama Pemasok... " required>
+            </div>
+            <div class="form-group">
+              <label for="addnama_obat">No HP Pemasok</label>
+              <input type="text" class="form-control" name="hp" id="hp" placeholder="No Telepon Pemasok... " required>
+            </div>
+            <div class="form-group">
+              <label for="addnama_obat">Alamat Pemasok</label>
+              <input type="text" class="form-control" name="alamat" id="alamat" placeholder="Alamat Pemasok... " required>
+            </div>
+
           </div>
-         
         </div>
         <div class="modal-footer justify-content-between">
           <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
@@ -127,15 +140,21 @@
           <h5>Edit Data</h5>
         </div>
       </div>
-      <form action="<?= base_url('satuan/update') ?>" method="POST">
+      <form action="<?= base_url('suppliers/update') ?>" method="POST">
         <div class="modal-body">
-          <input type="hidden" name="id" id="edtid">
-         
+          <input type="text" class="form-control" name="id" id="edtid"  required hidden>
           <div class="form-group">
-            <label for="edtnama_obat">Nama Satuan</label>
-            <input type="text" class="form-control" name="nama" id="edtnama" placeholder="Nama satuan... " required>
+            <label for="addnama_obat">Nama Pemasok</label>
+            <input type="text" class="form-control" name="nama" id="edtnama" placeholder="Nama Pemasok... " required>
           </div>
-
+          <div class="form-group">
+            <label for="addnama_obat">No HP Pemasok</label>
+            <input type="text" class="form-control" name="hp" id="edthp" placeholder="No Telepon Pemasok... " required>
+          </div>
+          <div class="form-group">
+            <label for="addnama_obat">Alamat Pemasok</label>
+            <input type="text" class="form-control" name="alamat" id="edtalamat" placeholder="Alamat Pemasok... " required>
+          </div>
 
 
         </div>
@@ -150,7 +169,7 @@
 <script>
   $(document).ready(() => {
     $('#tambah').click(function() {
-      $('#add-units').modal('show')
+      $('#add-drug').modal('show')
     })
 
 
@@ -160,12 +179,15 @@
   function edit(id) {
     $.ajax({
 
-      url: ' <?= base_url('satuan/getUnitsById/') ?>' + id,
+      url: ' <?= base_url('suppliers/getsupplierById/') ?>' + id,
       type: 'GET',
       dataType: 'json',
       success: function(data) {
+       
         $('#edtid').val(data[0].id)
         $('#edtnama').val(data[0].name)
+        $('#edthp').val(data[0].hp)
+        $('#edtalamat').val(data[0].address)
 
         $('#editdrug').modal('show')
 

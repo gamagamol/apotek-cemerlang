@@ -31,14 +31,7 @@ class Admin extends CI_Controller {
   }
 
   // READ DATA
-  public function coa() {
-    $data['title'] = 'Admin | COA';
-    $data['bc'] = 'Data Master / COA';
-    $data['coa'] = $this->apotek_models->get_data('coa');
-    $this->load->view('module/header', $data);
-    $this->load->view('admin/coa', $data);
-    $this->load->view('module/footer');
-  }
+ 
 
 
 
@@ -99,14 +92,7 @@ class Admin extends CI_Controller {
     $this->load->view('module/footer');
   }
 
-  public function suppliers() {
-    $data['title'] = 'Admin | Pemasok';
-    $data['bc'] = 'Data Ekstra / Pemasok';
-    $data['suppliers'] = $this->apotek_models->get_data('suppliers');
-    $this->load->view('module/header', $data);
-    $this->load->view('admin/suppliers', $data);
-    $this->load->view('module/footer');
-  }
+  
 
   public function drug_report() {
     $data['title'] = 'Admin | Laporan Obat';
@@ -307,26 +293,7 @@ class Admin extends CI_Controller {
       redirect("admin/units");
     }
   }
-  public function addsupplier() {
-    $name = $this->input->post("name");
-    $phone = $this->input->post("phone");
-    $address = $this->input->post("address");
 
-    $arr = [
-      "id" => null,
-      "name" => $name,
-      "hp" => $phone,
-      "address" => $address
-    ];
-    $query = $this->db->insert("suppliers", $arr);
-    if ($this->db->affected_rows() > 0) {
-      $this->session->set_flashdata("msg", "<div class='alert alert-success'>Berhasil menambahkan data! </div>");
-      redirect("admin/suppliers");
-    } else {
-      $this->session->set_flashdata("msg", "<div class='alert alert-danger'>Gagal menambahkan data! </div>");
-      redirect("admin/suppliers");
-    }
-  }
 
   // EDIT DATA
 
@@ -408,26 +375,7 @@ class Admin extends CI_Controller {
     }
   }
 
-  public function editsupplier() {
-    $id = $this->input->post("id_supplier");
-    $name = $this->input->post("name");
-    $hp = $this->input->post("phone");
-    $address = $this->input->post("address");
-
-    $this->db->where("id", $id);
-    $this->db->update("suppliers", [
-      "name" => $name,
-      "hp" => $hp,
-      "address" => $address
-    ]);
-    if ($this->db->affected_rows() > 0) {
-      $this->session->set_flashdata("msg", "<div class='alert alert-success'>Data berhasil diperbarui! </div>");
-      redirect("admin/suppliers");
-    } else {
-      $this->session->set_flashdata("msg", "<div class='alert alert-danger'>Data gagal diperbarui! </div>");
-      redirect("admin/suppliers");
-    }
-  }
+ 
 
   // DELETE DATA
 
@@ -483,16 +431,7 @@ class Admin extends CI_Controller {
     }
   }
 
-  public function deletesupplier($id) {
-    $query = $this->db->delete("suppliers", ["id" => $id]);
-    if ($this->db->affected_rows() > 0) {
-      $this->session->set_flashdata("msg", "<div class='alert alert-success'>Data berhasil dihapus!</div>");
-      redirect("admin/suppliers");
-    } else {
-      $this->session->set_flashdata("msg", "<div class='alert alert-danger'>Data gagal dihapus!</div>");
-      redirect("admin/suppliers");
-    }
-  }
+
 
   public function printdrugs() {
     $filter = $this->input->get("filter");

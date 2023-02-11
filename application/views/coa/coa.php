@@ -30,7 +30,7 @@
     <div class="container">
       <div class="card shadow mb-4">
         <div class="card-header py-3 mt-2">
-          <h6 class="m-0 font-weight-bold "><?= $title?></h6>
+          <h6 class="m-0 font-weight-bold "><?= $title ?></h6>
         </div>
 
         <form action="{{ url('COA') }}" method="get">
@@ -52,21 +52,23 @@
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
               <tr class="text-center">
                 <th>No.</th>
-                <th>Nama</th>
+                <th>Kode Akun</th>
+                <th>Nama Akun</th>
+                <th>Header Akun</th>
+                
                 <th>Aksi</th>
-               
               </tr>
               <?php
               $no = 1;
-
               ?>
               <?php foreach ($data as $d) : ?>
                 <tr class="text-center">
                   <td><?= $no ?></td>
-                  <td> <?= $d->name ?> </td>
-               
+                  <td> <?= $d->kode_coa ?> </td>
+                  <td> <?= $d->nama_coa ?> </td>
+                  <td> <?= $d->header_coa ?> </td>
                   <td>
-                    <a href="#" class="btn btn-warning" onclick="edit(<?= $d->id ?>)"> Edit</a>
+                    <a href="#" class="btn btn-warning" onclick="edit(<?= $d->id_coa ?>)"> Edit</a>
                   </td>
 
                 </tr>
@@ -90,22 +92,35 @@
 <!-- /.content-wrapper -->
 
 <!-- modal add drug -->
-<div class="modal fade" id="add-units">
+<div class="modal fade" id="add-drug">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Tambah Satuan</h4>
+        <h4 class="modal-title">Tambah Obat</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="<?= base_url('satuan/insert') ?>" method="POST">
+      <form action="<?= base_url('coa/insert') ?>" method="POST">
         <div class="modal-body">
-          <div class="form-group">
-            <label for="addkode_obat">Nama Satuan</label>
-            <input type="text" class="form-control" name="satuan" id="addkode_obat"  placeholder="Nama Satuan... " required >
+          <div id="adddrugalert"></div>
+          <div id="autofilldrug">
+
+            <div class="form-group">
+              <label for="addnama_obat">Kode Akun</label>
+              <input type="text" class="form-control" name="kode_coa"  placeholder="Kode Akun... " required >
+            </div>
+
+            <div class="form-group">
+              <label for="addnama_obat">Nama Akun</label>
+              <input type="text" class="form-control" name="nama_coa"  placeholder="Nama Akun... " required>
+            </div>
+            <div class="form-group">
+              <label for="addnama_obat">Header Akun</label>
+              <input type="text" class="form-control" name="header_coa"  placeholder="Header Akun... " required>
+            </div>
+
           </div>
-         
         </div>
         <div class="modal-footer justify-content-between">
           <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
@@ -127,15 +142,23 @@
           <h5>Edit Data</h5>
         </div>
       </div>
-      <form action="<?= base_url('satuan/update') ?>" method="POST">
+      <form action="<?= base_url('coa/update') ?>" method="POST">
         <div class="modal-body">
-          <input type="hidden" name="id" id="edtid">
-         
+          <input type="text" class="form-control" name="id_coa" id="edtid" required hidden>
+
           <div class="form-group">
-            <label for="edtnama_obat">Nama Satuan</label>
-            <input type="text" class="form-control" name="nama" id="edtnama" placeholder="Nama satuan... " required>
+            <label for="addnama_obat">Kode Akun</label>
+            <input type="text" class="form-control" name="kode_coa" id="edtkode" placeholder="Kode Akun... " required readonly>
           </div>
 
+          <div class="form-group">
+            <label for="addnama_obat">Nama Akun</label>
+            <input type="text" class="form-control" name="nama_coa" id="edtnama" placeholder="Nama Akun... " required>
+          </div>
+          <div class="form-group">
+            <label for="addnama_obat">Header Akun</label>
+            <input type="text" class="form-control" name="header_coa" id="edtheader" placeholder="Header Akun... " required>
+          </div>
 
 
         </div>
@@ -150,7 +173,7 @@
 <script>
   $(document).ready(() => {
     $('#tambah').click(function() {
-      $('#add-units').modal('show')
+      $('#add-drug').modal('show')
     })
 
 
@@ -160,12 +183,15 @@
   function edit(id) {
     $.ajax({
 
-      url: ' <?= base_url('satuan/getUnitsById/') ?>' + id,
+      url: ' <?= base_url('coa/getCoaById/') ?>' + id,
       type: 'GET',
       dataType: 'json',
       success: function(data) {
-        $('#edtid').val(data[0].id)
-        $('#edtnama').val(data[0].name)
+
+        $('#edtid').val(data[0].id_coa)
+        $('#edtkode').val(data[0].kode_coa)
+        $('#edtnama').val(data[0].nama_coa)
+        $('#edtheader').val(data[0].header_coa)
 
         $('#editdrug').modal('show')
 
