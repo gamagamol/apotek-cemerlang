@@ -1,386 +1,324 @@
--- phpMyAdmin SQL Dump
--- version 5.2.0
--- https://www.phpmyadmin.net/
+-- MySQL dump 10.13  Distrib 8.0.31, for macos12 (x86_64)
 --
--- Host: 127.0.0.1
--- Waktu pembuatan: 29 Jan 2023 pada 05.14
--- Versi server: 10.4.24-MariaDB
--- Versi PHP: 7.4.29
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
+-- Host: 127.0.0.1    Database: apotek
+-- ------------------------------------------------------
+-- Server version	8.0.32
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Database: `apotek`
+-- Table structure for table `capital`
 --
 
--- --------------------------------------------------------
+DROP TABLE IF EXISTS `capital`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `capital` (
+  `no_cap` int NOT NULL,
+  `date` date NOT NULL,
+  `debit` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `credit` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `catatan` text COLLATE utf8mb4_general_ci NOT NULL,
+  `nominal` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  PRIMARY KEY (`no_cap`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Struktur dari tabel `debt`
+-- Dumping data for table `capital`
 --
 
+LOCK TABLES `capital` WRITE;
+/*!40000 ALTER TABLE `capital` DISABLE KEYS */;
+INSERT INTO `capital` VALUES (1,'2023-01-30','Modal Usaha','Modal Usaha','Modal Usaha','15000000');
+/*!40000 ALTER TABLE `capital` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `coa`
+--
+
+DROP TABLE IF EXISTS `coa`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `coa` (
+  `id_coa` int NOT NULL AUTO_INCREMENT,
+  `kode_coa` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `nama_coa` varchar(45) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `header_coa` varchar(45) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  PRIMARY KEY (`id_coa`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `coa`
+--
+
+LOCK TABLES `coa` WRITE;
+/*!40000 ALTER TABLE `coa` DISABLE KEYS */;
+INSERT INTO `coa` VALUES (1,'101','akun','111'),(4,'112','test','test');
+/*!40000 ALTER TABLE `coa` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `debt`
+--
+
+DROP TABLE IF EXISTS `debt`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `debt` (
-  `no_debt` int(255) NOT NULL,
+  `no_debt` int NOT NULL AUTO_INCREMENT,
   `debt_date` date NOT NULL,
-  `debit` varchar(100) NOT NULL,
-  `credit` varchar(100) NOT NULL,
-  `catatan_debt` text NOT NULL,
-  `nominal_debt` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
+  `debit` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `credit` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `catatan_debt` text COLLATE utf8mb4_general_ci NOT NULL,
+  `nominal_debt` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  PRIMARY KEY (`no_debt`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Struktur dari tabel `drugs`
+-- Dumping data for table `debt`
 --
 
+LOCK TABLES `debt` WRITE;
+/*!40000 ALTER TABLE `debt` DISABLE KEYS */;
+INSERT INTO `debt` VALUES (1,'2023-01-29','kas','kas','hutang usaha','1000000'),(2,'2023-01-29','5-50100 Hutang Usaha','5-50100 Hutang Usaha','piutang','1500000');
+/*!40000 ALTER TABLE `debt` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `drugs`
+--
+
+DROP TABLE IF EXISTS `drugs`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `drugs` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `kode_obat` varchar(12) NOT NULL,
   `name` varchar(64) NOT NULL,
   `id_unit` varchar(11) NOT NULL,
-  `stock` int(11) NOT NULL,
-  `purchase_price` decimal(19,0) NOT NULL,
-  `selling_price` decimal(19,0) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `stock` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data untuk tabel `drugs`
+-- Dumping data for table `drugs`
 --
 
-INSERT INTO `drugs` (`id`, `kode_obat`, `name`, `id_unit`, `stock`, `purchase_price`, `selling_price`) VALUES
-(1, 'OB1', 'Paramex', '8', 352, '8000', '10000'),
-(2, 'OB2', 'Konidin', '8', 50, '3000', '5000'),
-(3, 'OB3', 'Panacilin', '8', 208, '4000', '5000');
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `expenditure`
---
-
-CREATE TABLE `expenditure` (
-  `no_exp` int(255) NOT NULL,
-  `date` date NOT NULL,
-  `debit` varchar(255) NOT NULL,
-  `credit` varchar(255) NOT NULL,
-  `catatan` text NOT NULL,
-  `nominal` int(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
+LOCK TABLES `drugs` WRITE;
+/*!40000 ALTER TABLE `drugs` DISABLE KEYS */;
+INSERT INTO `drugs` VALUES (1,'OB1','Paramexx','4',352),(2,'OB2','Konidin','8',50),(3,'OB3','Panacilin','8',208),(4,'OB4','testing','3',0),(5,'OB5','asd','4',0);
+/*!40000 ALTER TABLE `drugs` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Struktur dari tabel `income_re`
+-- Table structure for table `purchase`
 --
 
-CREATE TABLE `income_re` (
-  `no_inc` int(255) NOT NULL,
-  `date` date NOT NULL,
-  `debit` varchar(255) NOT NULL,
-  `credit` varchar(255) NOT NULL,
-  `catatan` text NOT NULL,
-  `nominal` int(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `invest`
---
-
-CREATE TABLE `invest` (
-  `no_invest` int(255) NOT NULL,
-  `date` date NOT NULL,
-  `debit` varchar(255) NOT NULL,
-  `credit` varchar(255) NOT NULL,
-  `catatan` text NOT NULL,
-  `nominal` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `purchase`
---
-
+DROP TABLE IF EXISTS `purchase`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `purchase` (
-  `id` int(11) NOT NULL,
-  `invoice_num` int(11) NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `invoice_num` int NOT NULL,
   `id_supplier` varchar(11) NOT NULL,
   `id_drug` varchar(64) NOT NULL,
-  `qty` int(11) NOT NULL,
+  `qty` int NOT NULL,
   `date` date NOT NULL,
-  `total` decimal(19,0) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `total` decimal(19,0) NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data untuk tabel `purchase`
+-- Dumping data for table `purchase`
 --
 
-INSERT INTO `purchase` (`id`, `invoice_num`, `id_supplier`, `id_drug`, `qty`, `date`, `total`) VALUES
-(5, 4, '1', '1', 500, '2020-06-04', '4000000'),
-(3, 2, '1', '3', 208, '2020-06-03', '832000'),
-(6, 5, '2', '1', 2, '2023-01-28', '16000');
-
--- --------------------------------------------------------
+LOCK TABLES `purchase` WRITE;
+/*!40000 ALTER TABLE `purchase` DISABLE KEYS */;
+INSERT INTO `purchase` VALUES (5,4,'1','1',500,'2020-06-04',4000000),(3,2,'1','3',208,'2020-06-03',832000),(6,5,'2','1',2,'2023-01-28',16000);
+/*!40000 ALTER TABLE `purchase` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Struktur dari tabel `receivable`
+-- Table structure for table `receivable`
 --
 
+DROP TABLE IF EXISTS `receivable`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `receivable` (
-  `no_re` int(255) NOT NULL,
+  `no_re` int NOT NULL,
   `re_date` date NOT NULL,
-  `debit` varchar(100) NOT NULL,
-  `credit` varchar(100) NOT NULL,
-  `catatan` text NOT NULL,
-  `nominal` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
+  `debit` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `credit` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `catatan` text COLLATE utf8mb4_general_ci NOT NULL,
+  `nominal` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  KEY `no_re` (`no_re`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Struktur dari tabel `sales`
+-- Dumping data for table `receivable`
 --
 
+LOCK TABLES `receivable` WRITE;
+/*!40000 ALTER TABLE `receivable` DISABLE KEYS */;
+INSERT INTO `receivable` VALUES (1,'2023-01-30','1-10001 Kas','1-10001 Kas','Hutang usaha','15000000');
+/*!40000 ALTER TABLE `receivable` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `sales`
+--
+
+DROP TABLE IF EXISTS `sales`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `sales` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `nota_num` varchar(20) NOT NULL,
   `id_drug` varchar(64) NOT NULL,
-  `qty` int(11) NOT NULL,
+  `qty` int NOT NULL,
   `date` date NOT NULL,
-  `total` decimal(19,0) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `total` decimal(19,0) NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data untuk tabel `sales`
+-- Dumping data for table `sales`
 --
 
-INSERT INTO `sales` (`id`, `nota_num`, `id_drug`, `qty`, `date`, `total`) VALUES
-(7, '1', '1', 100, '2020-06-07', '1000000'),
-(8, '2', '1', 40, '2020-06-07', '400000');
-
--- --------------------------------------------------------
+LOCK TABLES `sales` WRITE;
+/*!40000 ALTER TABLE `sales` DISABLE KEYS */;
+INSERT INTO `sales` VALUES (7,'1','1',100,'2020-06-07',1000000),(8,'2','1',40,'2020-06-07',400000);
+/*!40000 ALTER TABLE `sales` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Struktur dari tabel `sales_detail`
+-- Table structure for table `sales_detail`
 --
 
+DROP TABLE IF EXISTS `sales_detail`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `sales_detail` (
-  `id_sales_dtl` int(11) NOT NULL,
+  `id_sales_dtl` int NOT NULL AUTO_INCREMENT,
   `nota_num` varchar(20) NOT NULL,
   `id_drug` varchar(20) NOT NULL,
-  `qty` int(11) NOT NULL,
-  `subtotal` decimal(19,0) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
+  `qty` int NOT NULL,
+  `subtotal` decimal(19,0) NOT NULL,
+  PRIMARY KEY (`id_sales_dtl`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Struktur dari tabel `suppliers`
+-- Dumping data for table `sales_detail`
 --
 
+LOCK TABLES `sales_detail` WRITE;
+/*!40000 ALTER TABLE `sales_detail` DISABLE KEYS */;
+/*!40000 ALTER TABLE `sales_detail` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `suppliers`
+--
+
+DROP TABLE IF EXISTS `suppliers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `suppliers` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(64) NOT NULL,
   `hp` varchar(15) NOT NULL,
-  `address` varchar(128) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `address` varchar(128) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data untuk tabel `suppliers`
+-- Dumping data for table `suppliers`
 --
 
-INSERT INTO `suppliers` (`id`, `name`, `hp`, `address`) VALUES
-(1, 'CV Cininta', '0248313757', 'Jl Lampersari 57 Semarang'),
-(2, 'PT. Kalbe Farmasi', '082286062083', 'Jl. Garuda Sakti Km. 1, Kel. Simpang Baru');
-
--- --------------------------------------------------------
+LOCK TABLES `suppliers` WRITE;
+/*!40000 ALTER TABLE `suppliers` DISABLE KEYS */;
+INSERT INTO `suppliers` VALUES (1,'CV Cininta','0248313757','Jl Lampersari 57 Semarang'),(2,'PT. Kalbe Farmasi','082286062083','Jl. Garuda Sakti Km. 1, Kel. Simpang Baru'),(5,'testtttttt','12312312','test'),(6,'tesasdasdasdsad','12312','asdasd');
+/*!40000 ALTER TABLE `suppliers` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Struktur dari tabel `units`
+-- Table structure for table `units`
 --
 
+DROP TABLE IF EXISTS `units`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `units` (
-  `id` int(11) NOT NULL,
-  `name` varchar(32) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(32) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb3;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data untuk tabel `units`
+-- Dumping data for table `units`
 --
 
-INSERT INTO `units` (`id`, `name`) VALUES
-(3, 'botol'),
-(4, 'buah'),
-(5, 'dos'),
-(6, 'gelas'),
-(7, 'kaleng'),
-(8, 'kapsul'),
-(9, 'lembar');
-
--- --------------------------------------------------------
+LOCK TABLES `units` WRITE;
+/*!40000 ALTER TABLE `units` DISABLE KEYS */;
+INSERT INTO `units` VALUES (3,'botol'),(4,'buah'),(5,'dos'),(6,'gelas'),(7,'kaleng'),(8,'kapsul'),(9,'lembar'),(11,'tes');
+/*!40000 ALTER TABLE `units` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Struktur dari tabel `users`
+-- Table structure for table `users`
 --
 
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(64) NOT NULL,
   `username` varchar(64) NOT NULL,
   `password` varchar(64) NOT NULL,
-  `role` varchar(32) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `role` varchar(32) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data untuk tabel `users`
+-- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `username`, `password`, `role`) VALUES
-(1, 'Admin', 'admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'admin');
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (1,'Admin','admin','d033e22ae348aeb5660fc2140aec35850c4da997','admin');
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `withdraw_capital`
---
-
-CREATE TABLE `withdraw_capital` (
-  `no_cap` int(255) NOT NULL,
-  `date` date NOT NULL,
-  `debit` varchar(255) NOT NULL,
-  `kredit` varchar(255) NOT NULL,
-  `catatan` text NOT NULL,
-  `nominal` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Indexes for dumped tables
---
-
---
--- Indeks untuk tabel `debt`
---
-ALTER TABLE `debt`
-  ADD KEY `no_debt` (`no_debt`);
-
---
--- Indeks untuk tabel `drugs`
---
-ALTER TABLE `drugs`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indeks untuk tabel `invest`
---
-ALTER TABLE `invest`
-  ADD KEY `no_invest` (`no_invest`);
-
---
--- Indeks untuk tabel `purchase`
---
-ALTER TABLE `purchase`
-  ADD PRIMARY KEY (`id`) USING BTREE;
-
---
--- Indeks untuk tabel `receivable`
---
-ALTER TABLE `receivable`
-  ADD KEY `no_re` (`no_re`);
-
---
--- Indeks untuk tabel `sales`
---
-ALTER TABLE `sales`
-  ADD PRIMARY KEY (`id`) USING BTREE;
-
---
--- Indeks untuk tabel `sales_detail`
---
-ALTER TABLE `sales_detail`
-  ADD PRIMARY KEY (`id_sales_dtl`);
-
---
--- Indeks untuk tabel `suppliers`
---
-ALTER TABLE `suppliers`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indeks untuk tabel `units`
---
-ALTER TABLE `units`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indeks untuk tabel `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indeks untuk tabel `withdraw_capital`
---
-ALTER TABLE `withdraw_capital`
-  ADD KEY `no_cap` (`no_cap`);
-
---
--- AUTO_INCREMENT untuk tabel yang dibuang
---
-
---
--- AUTO_INCREMENT untuk tabel `drugs`
---
-ALTER TABLE `drugs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT untuk tabel `purchase`
---
-ALTER TABLE `purchase`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT untuk tabel `sales`
---
-ALTER TABLE `sales`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
---
--- AUTO_INCREMENT untuk tabel `sales_detail`
---
-ALTER TABLE `sales_detail`
-  MODIFY `id_sales_dtl` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT untuk tabel `suppliers`
---
-ALTER TABLE `suppliers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT untuk tabel `units`
---
-ALTER TABLE `units`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
--- AUTO_INCREMENT untuk tabel `users`
---
-ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-COMMIT;
-
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2023-02-14 19:27:40
