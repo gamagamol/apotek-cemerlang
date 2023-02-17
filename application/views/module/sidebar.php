@@ -87,7 +87,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="<?= base_url('admin/sales') ?>" class="nav-link <?= current_url() === base_url('admin/sales') ? 'active' : null ?>">
+                <a href="<?= base_url('penjualan') ?>" class="nav-link <?= current_url() === base_url('admin/sales') ? 'active' : null ?>">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Penjualan</p>
                 </a>
