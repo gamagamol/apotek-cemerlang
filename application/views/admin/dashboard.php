@@ -157,6 +157,26 @@
               <a href="<?= base_url('admin/capital') ?>" class="small-box-footer">Lihat data <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
+           <!-- ./col -->
+           <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-warning">
+              <div class="inner">
+                <?php
+                $return = $this->db->get('purchase_return')->result();
+                $nominal = 0;
+                foreach($return as $cap){
+                  $nominal += $cap->nominal;
+                }
+                ?>
+                <h3><?= 'Rp. '.number_format($nominal) ?></h3>
+                <p>
+                  RETUR PEMBELIAN
+                </p>
+              </div>
+              <a href="<?= base_url('admin/purchase_return') ?>" class="small-box-footer">Lihat data <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
         </div>
       </div>
       <!-- /.card-body -->
