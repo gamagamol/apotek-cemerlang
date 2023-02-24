@@ -54,7 +54,7 @@
                             <?php
                             $no = 1;
                             ?>
-                            <?php foreach ($data[0] as $d) : ?>
+                            <?php foreach ($data['penjualan'] as $d) : ?>
                                 <tr>
                                     <td><?= $no ?></td>
                                     <td><?= $d->tgl_jurnal ?></td>
@@ -89,7 +89,7 @@
                             <?php
                             $no = 1;
                             ?>
-                            <?php foreach ($data[0] as $d) : ?>
+                            <?php foreach ($data['penjualan'] as $d) : ?>
                                 <tr>
                                     <td><?= $no ?></td>
                                     <td><?= $d->tgl_jurnal ?></td>

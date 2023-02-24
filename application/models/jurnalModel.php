@@ -33,6 +33,8 @@ class jurnalModel extends CI_Model
             ->result();
 
 
-            return [$penjualan];
+        return [
+            'penjualan' =>    $penjualan,
+        ];
     }
 }
