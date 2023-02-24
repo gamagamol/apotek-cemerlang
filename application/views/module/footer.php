@@ -34,6 +34,7 @@
 //       if (document.location.href === base_url+'/admin/drugs' || document.location.href === base_url+'/admin/drugs#') {
 //         drugs();
 //       } else if (document.location.href === base_url+'/admin/purchase' || document.location.href === base_url+'/admin/purchase#') {
+//       } else if (document.location.href === base_url+'/admin/purchases' || document.location.href === base_url+'/admin/purchases#') {
 //         purchaseDetail();
 //       } else if (document.location.href === base_url+'/admin/sales' || document.location.href === base_url+'/admin/sales#') {
 //         saleDetail();

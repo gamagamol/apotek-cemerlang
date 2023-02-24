@@ -62,6 +62,7 @@
             <div class="small-box bg-success">
               <div class="inner">
                 <?php
+<<<<<<< HEAD
                 $purchase = $this->db->get('purchase')->result();
                 $totalpurchase = 0;
                 foreach($purchase as $p){
@@ -69,11 +70,24 @@
                 }
                 ?>
                 <h3><?= 'Rp. '.number_format($totalpurchase) ?></h3>
+=======
+                $purchases = $this->db->get('purchase')->result();
+                $total = 0;
+                foreach($purchases as $p){
+                  $total += $p->total;
+                }
+                ?>
+                <h3><?= 'Rp. '.number_format($total) ?></h3>
+>>>>>>> 4ed98b9cb575693a2950deb96a516b0c718100ca
                 <p>
                   PEMBELIAN
                 </p>
               </div>
+<<<<<<< HEAD
               <a href="<?= base_url('admin/purchase') ?>" class="small-box-footer">Lihat data <i class="fas fa-arrow-circle-right"></i></a>
+=======
+              <a href="<?= base_url('admin/purchases') ?>" class="small-box-footer">Lihat data <i class="fas fa-arrow-circle-right"></i></a>
+>>>>>>> 4ed98b9cb575693a2950deb96a516b0c718100ca
             </div>
           </div>
           <!-- ./col -->
@@ -157,6 +171,7 @@
               <a href="<?= base_url('admin/capital') ?>" class="small-box-footer">Lihat data <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
+<<<<<<< HEAD
            <!-- ./col -->
            <div class="col-lg-3 col-6">
             <!-- small box -->
@@ -177,6 +192,8 @@
               <a href="<?= base_url('admin/purchase_return') ?>" class="small-box-footer">Lihat data <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
+=======
+>>>>>>> 4ed98b9cb575693a2950deb96a516b0c718100ca
         </div>
       </div>
       <!-- /.card-body -->
