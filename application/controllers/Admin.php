@@ -37,18 +37,10 @@ class Admin extends CI_Controller {
 
   public function purchases() {
     $data['title'] = 'Admin | Pembelian';
-<<<<<<< HEAD
-    $data['bc'] = 'Data Master / Pembelian';
-    $data['purchases'] = $this->db->query("select purchase.*, purchase.id as idp, drugs.name as dname from purchase inner join drugs on purchase.id_drug = drug.id")->result();
-    
-    $this->load->view('module/header', $data);
-    $this->load->view('admin/purchase', $data);
-=======
     $data['purchases'] = $this->apotek_models->get_data_query('select purchase.*, purchase.id as idp, drugs.name as dname, suppliers.name as sname from purchase, drugs, suppliers where purchase. id_supplier = suppliers.id and purchase.id_drug = drugs.id')->result();
     $data['bc'] = 'Data Master / Pembelian';
     $this->load->view('module/header', $data);
     $this->load->view('admin/purchases', $data);
->>>>>>> 4ed98b9cb575693a2950deb96a516b0c718100ca
     $this->load->view('module/footer');
   }
 

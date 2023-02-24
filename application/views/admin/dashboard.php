@@ -62,15 +62,6 @@
             <div class="small-box bg-success">
               <div class="inner">
                 <?php
-<<<<<<< HEAD
-                $purchase = $this->db->get('purchase')->result();
-                $totalpurchase = 0;
-                foreach($purchase as $p){
-                  $totalpurchase += $p->total;
-                }
-                ?>
-                <h3><?= 'Rp. '.number_format($totalpurchase) ?></h3>
-=======
                 $purchases = $this->db->get('purchase')->result();
                 $total = 0;
                 foreach($purchases as $p){
@@ -78,16 +69,11 @@
                 }
                 ?>
                 <h3><?= 'Rp. '.number_format($total) ?></h3>
->>>>>>> 4ed98b9cb575693a2950deb96a516b0c718100ca
                 <p>
                   PEMBELIAN
                 </p>
               </div>
-<<<<<<< HEAD
-              <a href="<?= base_url('admin/purchase') ?>" class="small-box-footer">Lihat data <i class="fas fa-arrow-circle-right"></i></a>
-=======
               <a href="<?= base_url('admin/purchases') ?>" class="small-box-footer">Lihat data <i class="fas fa-arrow-circle-right"></i></a>
->>>>>>> 4ed98b9cb575693a2950deb96a516b0c718100ca
             </div>
           </div>
           <!-- ./col -->
@@ -171,29 +157,6 @@
               <a href="<?= base_url('admin/capital') ?>" class="small-box-footer">Lihat data <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
-<<<<<<< HEAD
-           <!-- ./col -->
-           <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-warning">
-              <div class="inner">
-                <?php
-                $return = $this->db->get('purchase_return')->result();
-                $nominal = 0;
-                foreach($return as $cap){
-                  $nominal += $cap->nominal;
-                }
-                ?>
-                <h3><?= 'Rp. '.number_format($nominal) ?></h3>
-                <p>
-                  RETUR PEMBELIAN
-                </p>
-              </div>
-              <a href="<?= base_url('admin/purchase_return') ?>" class="small-box-footer">Lihat data <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-=======
->>>>>>> 4ed98b9cb575693a2950deb96a516b0c718100ca
         </div>
       </div>
       <!-- /.card-body -->

@@ -152,16 +152,17 @@
                   <p>Penjualan</p>
                 </a>
               </li>
+            
               <li class="nav-item">
-                <a href="<?= base_url('admin/bukubesar') ?>" class="nav-link">
+                <a href="<?= base_url('jurnal') ?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Buku Besar</p>
+                  <p>Jurnal</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="<?= base_url('admin/jurnal') ?>" class="nav-link">
+                <a href="<?= base_url('jurnal/buku_besar') ?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Jurnal</p>
+                  <p>Buku Besar</p>
                 </a>
               </li>
               <li class="nav-item">
