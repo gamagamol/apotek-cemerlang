@@ -47,16 +47,19 @@ class pembelian extends CI_Controller
         $lastId = $lastId[0]->id;
 
         $arrJurnalDebet = [
-            'id_coa' => 101,
+            'kode_coa' => 101,
             'id_transaksi' => $lastId,
-            'tgl' => $this->input->post("date"),
-            'debet' => $this->input->post("total"),
+            'tgl_jurnal' => $this->input->post("date"),
+            'nominal' => $this->input->post("total"),
+            'posisi_dr_cr'=>'debet'
         ];
         $arrJurnalKredit = [
-            'id_coa' => 401,
+            'kode_coa' => 500,
             'id_transaksi' => $lastId,
-            'tgl' => $this->input->post("date"),
-            'kredit' => $this->input->post("total"),
+            'tgl_jurnal' => $this->input->post("date"),
+            'nominal' => $this->input->post("total"),
+            'posisi_dr_cr' => 'kredit'
+
         ];
 
         $this->jurnalModel->insert($arrJurnalDebet, $arrJurnalKredit);

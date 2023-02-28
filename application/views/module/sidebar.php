@@ -81,7 +81,7 @@
 
 
               <li class="nav-item">
-                <a href="<?= base_url('admin/purchases') ?>" class="nav-link <?= current_url() === base_url('admin/purchases') ? 'active' : null ?>">
+                <a href="<?= base_url('pembelian') ?>" class="nav-link <?= current_url() === base_url('admin/purchases') ? 'active' : null ?>">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Pembelian</p>
                 </a>
