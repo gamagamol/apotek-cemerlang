@@ -147,7 +147,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="<?= base_url('admin/sale_report') ?>" class="nav-link">
+                <a href="<?= base_url('penjualan/laporan') ?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Penjualan</p>
                 </a>

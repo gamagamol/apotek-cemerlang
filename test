@@ -1,57 +1,6 @@
- <div class="card">
-      <div class="card-header">
-        <h3 class="card-title">Tabel</h3>
-      </div>
-      <div class="card-body">
-        <div class="row">
-          <div class="col">
-            <button class="btn btn-primary btn-sm btn-flat" data-toggle="modal" data-target="#add-drug">Tambah</button>
-            &nbsp;
-          </div>
-        </div>
-        <br />
-        <div class="container">
-          <div class="row">
-            <div class="col-md-3 text-center">
-              <table class="table table-bordered" id="table">
-                <thead>
-                  <tr>
-                    <th>No.</th>
-                    <th>Kode</th>
-                    <th>Nama</th>
-                    <th>Stok</th>
-                    <th>Aksi</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <?php 
-                  $no=1;
-                  
-                  ?>
-                  <?php foreach ($data as $d) : ?>
-                    <tr>
-                      <td><?= $no?></td>
-                      <td> <?= $d->kode_obat ?> </td>
-                      <td> <?= $d->name ?> </td>
-                      <td> <?= $d->stock ?> </td>
-                      <td>
-                        <a href="" class="btn btn-warning"> Edit</a>
-                        <a href="" class="btn btn-danger"> Hapus</a>
-                      </td>
-                      
-                    </tr>
-                    <?php 
-                    $no++;
-                    
-                    ?>
-                  <?php endforeach; ?>
-                </tbody>
-              </table>
-
-            </div>
-          </div>
-        </div>
-        <!--</div>-->
-      </div>
-      <!-- /.card-body -->
-    </div>
+select distinct b.date,b.name,
+(select sum(total) as total from apotek.sales where date=b.date and id_drug=b.id_obat)
+as total from(
+SELECT d.name,d.id as id_obat,s.date FROM apotek.sales s
+join apotek.drugs d on s.id_drug=d.id
+) b

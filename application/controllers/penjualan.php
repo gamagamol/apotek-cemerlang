@@ -69,4 +69,15 @@ class penjualan extends CI_Controller
         $this->session->set_flashdata("msg", "<div class='alert alert-success'>Penjualan baru anda berhasil ditambahkan</div>");
         redirect("penjualan");
     }
+
+    public function laporan(){
+        $data=[
+            'title'=>'Laporan Penjualan',
+           'data'=> $this->penjualanModel->laporan(),
+        ];
+        // print_r($data);
+        $this->load->view('module/header', $data);
+        $this->load->view('sales/laporan', $data);
+        $this->load->view('module/footer');
+    }
 }

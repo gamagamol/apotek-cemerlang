@@ -28,5 +28,16 @@ class penjualanModel extends CI_Model
     }
 
 
+    public function laporan(){
+        return $this->db->query("select distinct b.date,b.name,
+        (select sum(total) as total from apotek.sales where date=b.date and id_drug=b.id_obat)
+        as total from(
+        SELECT d.name,d.id as id_obat,s.date FROM apotek.sales s
+        join apotek.drugs d on s.id_drug=d.id
+        ) b ORDER BY b.date ASC
+        ")->result();
+    }
+
+
 
 }
