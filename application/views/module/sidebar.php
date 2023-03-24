@@ -135,13 +135,13 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="<?= base_url('admin/purchase_report') ?>" class="nav-link">
+                <a href="<?= base_url('pembelian/laporan') ?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Pembelian</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="<?= base_url('admin/purchase_return_report') ?>" class="nav-link">
+                <a href="<?= base_url('retur_pembelian/laporan') ?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Retur Pembelian</p>
                 </a>

@@ -68,4 +68,16 @@ class retur_pembelian extends CI_Controller
         $this->session->set_flashdata("msg", "<div class='alert alert-success'>Retur Pembelian baru anda berhasil ditambahkan</div>");
         redirect("retur_pembelian");
     }
+
+
+    public function laporan(){
+        $data=[
+            'title'=>'Laporan retur_pembelian',
+           'data'=> $this->retur_pembelianModel->laporan(),
+        ];
+        // print_r($data);
+        $this->load->view('module/header', $data);
+        $this->load->view('purchase_return/laporan', $data);
+        $this->load->view('module/footer');
+    }
 }

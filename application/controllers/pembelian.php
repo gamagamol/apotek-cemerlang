@@ -69,4 +69,15 @@ class pembelian extends CI_Controller
         $this->session->set_flashdata("msg", "<div class='alert alert-success'>Pembelian baru anda berhasil ditambahkan</div>");
         redirect("pembelian");
     }
+
+    public function laporan(){
+        $data=[
+            'title'=>'Laporan Pembelian',
+           'data'=> $this->pembelianModel->laporan(),
+        ];
+        // print_r($data);
+        $this->load->view('module/header', $data);
+        $this->load->view('purchase/laporan', $data);
+        $this->load->view('module/footer');
+    }
 }
