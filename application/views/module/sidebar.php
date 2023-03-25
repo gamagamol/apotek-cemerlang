@@ -99,21 +99,15 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="<?= base_url('admin/debt') ?>" class="nav-link <?= current_url() === base_url('admin/debt') ? 'active' : null ?>">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Hutang</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="<?= base_url('admin/receivable') ?>" class="nav-link <?= current_url() === base_url('admin/receivable') ? 'active' : null ?>">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Piutang</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="<?= base_url('admin/capital') ?>" class="nav-link <?= current_url() === base_url('admin/capital') ? 'active' : null ?>">
+                <a href="<?= base_url('modal') ?>" class="nav-link <?= current_url() === base_url('admin/modal') ? 'active' : null ?>">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Modal</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= base_url('beban') ?>" class="nav-link <?= current_url() === base_url('admin/beban') ? 'active' : null ?>">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Beban</p>
                 </a>
               </li>
             </ul>
