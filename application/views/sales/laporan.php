@@ -23,7 +23,6 @@
         </div>
         <!-- /.container-fluid -->
     </section>
-
     <!-- Main content -->
     <section class="content">
         <!-- Default box -->
@@ -32,10 +31,6 @@
                 <div class="card-header py-3 mt-2">
                     <h6 class="m-0 font-weight-bold "> <?= $title ?> </h6>
                 </div>
-
-
-
-
                 <div class="card-body">
                     <?= $this->session->flashdata("msg") ?>
                     <div class="table-responsive">
@@ -61,7 +56,6 @@
                                 <?php
                                 $no++;
                                 $total += $d->total;
-
                                 ?>
                             <?php endforeach; ?>
                             <tr>
