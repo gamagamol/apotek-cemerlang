@@ -57,9 +57,6 @@
                                     <td><?= $d->date ?></td>
                                     <td><?= $d->name ?></td>
                                     <td><?= 'Rp' . number_format($d->total) ?></td>
-
-
-
                                 </tr>
                                 <?php
                                 $no++;
