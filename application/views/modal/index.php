@@ -67,7 +67,7 @@
                                     <td> <?= $d->nota_num ?> </td>
                                     <td> <?= $d->date ?> </td>
                                     <td> <?= $d->nama_modal ?> </td>
-                                    <td> <?= $d->total ?> </td>
+                                    <td><?= 'Rp' . number_format($d->total) ?></td>
 
 
                                 </tr>

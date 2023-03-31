@@ -65,6 +65,10 @@ class pembelian extends CI_Controller
         $this->jurnalModel->insert($arrJurnalDebet, $arrJurnalKredit);
 
 
+        $obat = $this->obatModel->getDrugById((int)$this->input->post("id_drug"));
+        $obatStock=(int)$obat[0]['stock']-(int)$this->input->post("qty");
+        $updateObat=['stock'=>$obatStock];
+        $this->obatModel->update($obat[0]['id'],$updateObat);
 
         $this->session->set_flashdata("msg", "<div class='alert alert-success'>Pembelian baru anda berhasil ditambahkan</div>");
         redirect("pembelian");
@@ -79,5 +83,12 @@ class pembelian extends CI_Controller
         $this->load->view('module/header', $data);
         $this->load->view('purchase/laporan', $data);
         $this->load->view('module/footer');
+    }
+    
+    public function getStock(){
+        $id_drug=$this->input->post('id_drug');
+        $data=$this->obatModel->getDrugById((int)$id_drug);
+        echo json_encode($data);
+
     }
 }

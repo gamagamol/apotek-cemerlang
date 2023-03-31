@@ -59,16 +59,20 @@ class retur_pembelian extends CI_Controller
             'tgl_jurnal' => $this->input->post("date"),
             'nominal' => $this->input->post("total"),
             'posisi_dr_cr' => 'kredit'
+
         ];
 
         $this->jurnalModel->insert($arrJurnalDebet, $arrJurnalKredit);
 
 
+        $obat = $this->obatModel->getDrugById((int)$this->input->post("id_drug"));
+        $obatStock=(int)$obat[0]['stock']-(int)$this->input->post("qty");
+        $updateObat=['stock'=>$obatStock];
+        $this->obatModel->update($obat[0]['id'],$updateObat);
 
         $this->session->set_flashdata("msg", "<div class='alert alert-success'>Retur Pembelian baru anda berhasil ditambahkan</div>");
         redirect("retur_pembelian");
     }
-
 
     public function laporan(){
         $data=[
@@ -79,5 +83,12 @@ class retur_pembelian extends CI_Controller
         $this->load->view('module/header', $data);
         $this->load->view('purchase_return/laporan', $data);
         $this->load->view('module/footer');
+    }
+    
+    public function getStock(){
+        $id_drug=$this->input->post('id_drug');
+        $data=$this->obatModel->getDrugById((int)$id_drug);
+        echo json_encode($data);
+
     }
 }

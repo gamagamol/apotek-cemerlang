@@ -68,9 +68,9 @@
                                     <td> <?= $d->nota_num ?> </td>
                                     <td> <?= $d->date ?> </td>
                                     <td> <?= $d->name ?> </td>
-                                    <td> <?= $d->harga_penjualan ?> </td>
+                                    <td><?= 'Rp' . number_format($d->harga_penjualan) ?></td>
                                     <td> <?= $d->qty ?> </td>
-                                    <td> <?= $d->total ?> </td>
+                                    <td><?= 'Rp' . number_format($d->total) ?></td>
 
 
                                 </tr>
@@ -214,7 +214,7 @@
                 $('#btnadddrug').attr('hidden',true)
 
             } else {
-                total = parseInt(harga) + parseInt(jumlah)
+                total = parseInt(harga) * parseInt(jumlah)
                 $('#total').val(total)
                 $('#btnadddrug').removeAttr('hidden')
             }

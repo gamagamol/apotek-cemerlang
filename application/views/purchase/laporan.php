@@ -1,10 +1,8 @@
 <!-- Navbar -->
 <?php $this->load->view('module/navbar') ?>
 <!-- /.navbar -->
-
 <!-- Main Sidebar Container -->
 <?php $this->load->view('module/sidebar') ?>
-
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -23,7 +21,6 @@
         </div>
         <!-- /.container-fluid -->
     </section>
-
     <!-- Main content -->
     <section class="content">
         <!-- Default box -->
@@ -32,10 +29,6 @@
                 <div class="card-header py-3 mt-2">
                     <h6 class="m-0 font-weight-bold "> <?= $title ?> </h6>
                 </div>
-
-
-
-
                 <div class="card-body">
                     <?= $this->session->flashdata("msg") ?>
                     <div class="table-responsive">
@@ -57,14 +50,10 @@
                                     <td><?= $d->date ?></td>
                                     <td><?= $d->name ?></td>
                                     <td><?= 'Rp' . number_format($d->total) ?></td>
-
-
-
                                 </tr>
                                 <?php
                                 $no++;
                                 $total += $d->total;
-
                                 ?>
                             <?php endforeach; ?>
                             <tr>
