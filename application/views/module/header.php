@@ -29,5 +29,8 @@
   <script src="<?= base_url() ?>/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
   <!-- AdminLTE App -->
   <script src="<?= base_url() ?>/assets/dist/js/adminlte.min.js"></script>
+  <!-- masking -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js" integrity="sha256-yE5LLp5HSQ/z+hJeCqkz9hdjNkk1jaiGG0tDCraumnA=" crossorigin="anonymous">
+  </script>
 </head>
 <?= current_url() == base_url() || current_url() == base_url("auth") ? '<body class="hold-transition login-page">' : '<body class="hold-transition sidebar-mini"><div class ="wrapper">' ?>

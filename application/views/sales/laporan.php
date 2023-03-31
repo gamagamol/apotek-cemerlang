@@ -1,10 +1,8 @@
 <!-- Navbar -->
 <?php $this->load->view('module/navbar') ?>
 <!-- /.navbar -->
-
 <!-- Main Sidebar Container -->
 <?php $this->load->view('module/sidebar') ?>
-
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
