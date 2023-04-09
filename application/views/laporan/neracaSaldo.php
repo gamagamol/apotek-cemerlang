@@ -30,7 +30,7 @@
         <div class="container">
             <div class="card shadow mb-4">
                 <div class="card-header py-3 mt-2">
-                    <h6 class="m-0 font-weight-bold ">Data Buku Besar</h6>
+                    <h6 class="m-0 font-weight-bold ">Data Neraca Saldo</h6>
                 </div>
 
 
@@ -45,9 +45,7 @@
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <tr class="text-center">
                                 <th>No.</th>
-                                <th>Tanggal</th>
-                                <th>Kode Akun</th>
-                                <th>ref</th>
+                                <th>Nama Akun</th>
                                 <th>Debit</th>
                                 <th>Kredit</th>
                             </tr>
@@ -56,34 +54,33 @@
                             $total_kredit = 0;
                             $total_debit = 0;
                             ?>
-                            <?php foreach ($data['penjualan'] as $d) : ?>
+                            <?php foreach ($data as $d) : ?>
 
                                 <tr>
                                     <td><?= $no ?></td>
-                                    <td><?= $d->tgl_jurnal ?></td>
                                     <td><?= $d->nama_coa ?></td>
-                                    <td></td>
                                     <?php if ($d->posisi_dr_cr == 'debet') : ?>
 
-                                        <td><?= number_format($d->nominal) ?></td>
+                                        <td><?= number_format($d->total) ?></td>
                                         <td> <?= '' ?> </td>
-                                        <!-- kalo misalkan akun bertambah di sisi debit bikin totalnya disini! -->
-                                        <?php $total_debit += $d->nominal ?>
+                                        <?php $total_debit += $d->total ?>
 
                                     <?php else : ?>
                                         <td> <?= '' ?></td>
-                                        <td><?= number_format($d->nominal) ?></td>
-                                        <!-- kalo misalkan akun bertambah di sisi kredit bikin totalnya disini! -->
-                                        <?php $total_kredit += $d->nominal ?>
+                                        <td><?= number_format($d->total) ?></td>
+                                        <?php $total_kredit += $d->total ?>
 
                                     <?php endif; ?>
+
+
+
                                 </tr>
 
 
                             <?php $no++;
                             endforeach; ?>
                             <tr>
-                                <td colspan="4" class="text-center">Total</td>
+                                <td colspan="2" class="text-center">Total</td>
                                 <td><?= number_format($total_debit) ?></td>
                                 <td><?= number_format($total_kredit) ?></td>
                             </tr>

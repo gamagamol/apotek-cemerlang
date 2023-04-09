@@ -33,12 +33,20 @@ class pembelian extends CI_Controller
     {
 
 
+        $harga= $this->input->post("harga_pembelian");
+        $arrHarga=explode('.',$harga);
+        $hrg='';
+        foreach($arrHarga as $h){
+            $hrg.=$h;
+        }
+       
+
         $arrPembelian = [
             "nota_num" => $this->input->post("nota_num"),
             "id_drug" => $this->input->post("id_drug"),
             "date" => $this->input->post("date"),
             "qty" => $this->input->post("qty"),
-            "harga_pembelian" => $this->input->post("harga_pembelian"),
+            "harga_pembelian" => (int)$hrg,
             "total" => $this->input->post("total"),
         ];
         $this->pembelianModel->insert($arrPembelian);

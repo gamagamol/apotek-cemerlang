@@ -160,6 +160,18 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a href="<?= base_url('jurnal/neracaSaldo') ?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Neraca Saldo</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= base_url('jurnal/persediaan') ?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Persediaan </p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="<?= base_url('admin/laporanlabarugi') ?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Laporan Laba Rugi</p>

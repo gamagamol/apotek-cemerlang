@@ -37,4 +37,32 @@ class jurnalModel extends CI_Model
             'penjualan' =>    $penjualan,
         ];
     }
+
+
+    public function neracaSaldo()
+    {
+        return $this->db->query("SELECT nama_coa,sum(nominal) as total,posisi_dr_cr FROM apotek.jurnal j
+            join apotek.coa c on j.kode_coa= c.kode_coa
+            where c.kode_coa=401
+            group by nama_coa,posisi_dr_cr
+            union
+            SELECT nama_coa,sum(nominal) as total,posisi_dr_cr FROM apotek.jurnal j
+            join apotek.coa c on j.kode_coa= c.kode_coa
+            where c.kode_coa=101
+            group by nama_coa,posisi_dr_cr")->result();
+            
+    }
+
+    public function persediaan(){
+        return $this->db->query("select * from (select date,qty,harga_penjualan as harga,total,nama_coa from apotek.sales
+                                join jurnal on jurnal.id_transaksi = sales.id 
+                                join coa on coa.kode_coa=jurnal.kode_coa
+                                where coa.kode_coa=401
+                                union
+                                select date,qty,harga_pembelian as harga,total,nama_coa from apotek.purchase
+                                join jurnal on jurnal.id_transaksi = purchase.id
+                                join coa on coa.kode_coa=jurnal.kode_coa
+                                where coa.kode_coa=500) b
+                                order by b.date asc")->result();
+    }
 }

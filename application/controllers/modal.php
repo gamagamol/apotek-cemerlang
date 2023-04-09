@@ -20,6 +20,7 @@ class modal extends CI_Controller
 
         $arrNoNota = explode('/', $data['no_nota'][0]->nota_num);
         $tahun = date('Y');
+        // print_r($arrNoNota);
         $lastId = (int)$arrNoNota[3] + 1;
         $data['no_nota'] = "cemerlang/modal/$tahun/$lastId";
 

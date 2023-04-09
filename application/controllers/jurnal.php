@@ -14,14 +14,15 @@ class jurnal extends CI_Controller
 
         $data['title'] = 'Admin | Jurnal';
         $data['data'] = $this->jurnalModel->jurnal();
-      
+
         $this->load->view('module/header', $data);
         $this->load->view('laporan/jurnal', $data);
         $this->load->view('module/footer');
     }
 
 
-    public function buku_besar(){
+    public function buku_besar()
+    {
 
         $data['title'] = 'Admin | Buku Besar';
         $data['data'] = $this->jurnalModel->bukubesar();
@@ -31,4 +32,22 @@ class jurnal extends CI_Controller
         $this->load->view('module/footer');
     }
 
+    public function neracaSaldo()
+    {
+        $data['title'] = 'Admin | Neraca Saldo';
+        $data['data'] = $this->jurnalModel->neracaSaldo();
+        // print_r($data);die;
+        $this->load->view('module/header', $data);
+        $this->load->view('laporan/neracaSaldo', $data);
+        $this->load->view('module/footer');
+    }
+
+    public function persediaan(){
+        $data['title'] = 'Admin | Persediaan';
+        $data['data'] = $this->jurnalModel->persediaan();
+       
+        $this->load->view('module/header', $data);
+        $this->load->view('laporan/persediaan', $data);
+        $this->load->view('module/footer');
+    }
 }
