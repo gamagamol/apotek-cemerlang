@@ -65,4 +65,9 @@ class jurnalModel extends CI_Model
                                 where coa.kode_coa=500) b
                                 order by b.date asc")->result();
     }
+
+    public function labarugi(){
+        return $this->db->query("SELECT sum(total) as totalpenjualan, (select sum(total) from beban) as totalbeban from sales")->result();
+    }
+
 }

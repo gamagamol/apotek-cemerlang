@@ -82,4 +82,13 @@ class jurnal extends CI_Controller
         $this->load->view('module/footer');
     }
 
+    public function labarugi()
+    {
+        $data['title'] = 'Admin | labarugi';
+        $data['data'] = $this->jurnalModel->labarugi();
+       
+        $this->load->view('module/header', $data);
+        $this->load->view('laporan/labarugi', $data);
+        $this->load->view('module/footer');
+    }
 }

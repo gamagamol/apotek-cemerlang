@@ -172,7 +172,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="<?= base_url('admin/laporanlabarugi') ?>" class="nav-link">
+                <a href="<?= base_url('jurnal/labarugi') ?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Laporan Laba Rugi</p>
                 </a>
