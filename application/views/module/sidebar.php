@@ -146,7 +146,7 @@
                   <p>Penjualan</p>
                 </a>
               </li>
-            
+
               <li class="nav-item">
                 <a href="<?= base_url('jurnal') ?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
@@ -193,4 +193,5 @@
       <!-- /.sidebar-menu -->
     </div>
     <!-- /.sidebar -->
+
   </aside>

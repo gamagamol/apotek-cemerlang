@@ -55,14 +55,14 @@ class pembelian extends CI_Controller
         $lastId = $lastId[0]->id;
 
         $arrJurnalDebet = [
-            'kode_coa' => 101,
+            'kode_coa' => 500,
             'id_transaksi' => $lastId,
             'tgl_jurnal' => $this->input->post("date"),
             'nominal' => $this->input->post("total"),
             'posisi_dr_cr'=>'debet'
         ];
         $arrJurnalKredit = [
-            'kode_coa' => 500,
+            'kode_coa' => 101,
             'id_transaksi' => $lastId,
             'tgl_jurnal' => $this->input->post("date"),
             'nominal' => $this->input->post("total"),

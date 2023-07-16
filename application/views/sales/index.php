@@ -46,7 +46,7 @@
                 <div class="card-body">
                     <?= $this->session->flashdata("msg") ?>
 
-                    <a href="#" class="btn btn-primary ml-1 mt-3 mb-3" id="tambah"> <i class="fas fa-plus-circle me-1  " style="letter-spacing: 2px"></i> Tambah </a>
+                    <a href="<?= base_url('penjualan/create') ?>" class="btn btn-primary ml-1 mt-3 mb-3" id="tambah"> <i class="fas fa-plus-circle me-1  " style="letter-spacing: 2px"></i> Tambah </a>
                     <div class="table-responsive">
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <tr class="text-center">
@@ -211,7 +211,7 @@
 
             if (jumlah > stock) {
                 alert("masukan Jumlah lebih sedikit")
-                $('#btnadddrug').attr('hidden',true)
+                $('#btnadddrug').attr('hidden', true)
 
             } else {
                 total = parseInt(harga) * parseInt(jumlah)

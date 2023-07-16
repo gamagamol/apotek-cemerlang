@@ -9,11 +9,14 @@ class penjualanModel extends CI_Model
 
 
         return $this->db->query('select sales.id,nota_num,date,d.name,harga_penjualan,qty,total from sales
-                                join drugs d on d.id = sales.id_drug')->result();
+                                join drugs d on d.id = sales.id_drug
+                                group by nota_num
+                                ')->result();
     }
     public function insert($data)
     {
-        $this->db->insert('sales', $data);
+        $this->db->insert_batch('sales', $data);
+        return $this->db->insert_id();
     }
 
     public function MaxId(){
