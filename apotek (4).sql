@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 14, 2023 at 04:49 AM
+-- Generation Time: May 14, 2023 at 02:00 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
@@ -132,7 +132,15 @@ INSERT INTO `jurnal` (`id_jurnal`, `id_transaksi`, `kode_coa`, `tgl_jurnal`, `po
 (19, 4, '101', '2023-04-14', 'debet', 10000),
 (20, 4, '501', '2023-04-14', 'kredit', 10000),
 (21, 1, '101', '2023-04-14', 'debet', 50000),
-(22, 1, '401', '2023-04-14', 'kredit', 50000);
+(22, 1, '401', '2023-04-14', 'kredit', 50000),
+(23, 2, '101', '2023-05-07', 'debet', 500000),
+(24, 2, '401', '2023-05-07', 'kredit', 500000),
+(25, 3, '101', '2023-05-07', 'debet', 100000),
+(26, 3, '401', '2023-05-07', 'kredit', 100000),
+(27, 4, '101', '2023-05-07', 'debet', 200000),
+(28, 4, '401', '2023-05-07', 'kredit', 200000),
+(29, 5, '101', '2023-05-07', 'debet', 50000),
+(30, 5, '401', '2023-05-07', 'kredit', 50000);
 
 -- --------------------------------------------------------
 
@@ -153,7 +161,11 @@ CREATE TABLE `modal` (
 --
 
 INSERT INTO `modal` (`id`, `nota_num`, `date`, `nama_modal`, `total`) VALUES
-(1, 'cemerlang/modal/2023/1', '2023-03-25', 'modal awal', '10000000');
+(1, 'cemerlang/modal/2023/1', '2023-03-25', 'modal_awal', '10000000'),
+(2, 'cemerlang/modal/2023/2', '2023-05-07', 'bertambah', '500000'),
+(3, 'cemerlang/modal/2023/3', '2023-05-07', 'bertambah', '100000'),
+(4, 'cemerlang/modal/2023/4', '2023-05-07', 'berkurang', '200000'),
+(5, 'cemerlang/modal/2023/5', '2023-05-07', 'berkurang', '50000');
 
 -- --------------------------------------------------------
 
@@ -396,13 +408,13 @@ ALTER TABLE `beban`
 -- AUTO_INCREMENT for table `jurnal`
 --
 ALTER TABLE `jurnal`
-  MODIFY `id_jurnal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id_jurnal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `modal`
 --
 ALTER TABLE `modal`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `purchase`

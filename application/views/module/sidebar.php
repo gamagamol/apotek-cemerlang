@@ -172,9 +172,15 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="<?= base_url('admin/laporanlabarugi') ?>" class="nav-link">
+                <a href="<?= base_url('jurnal/labarugi') ?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Laporan Laba Rugi</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= base_url('modal/perubahan_modal') ?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Laporan Perubahan Modal</p>
                 </a>
               </li>
             </ul>

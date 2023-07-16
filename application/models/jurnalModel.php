@@ -112,4 +112,9 @@ class jurnalModel extends CI_Model
                     $where 
                     order by b.date")->result();
     }
+
+    public function labarugi(){
+        return $this->db->query("SELECT sum(total) as totalpenjualan, (select sum(total) from beban) as totalbeban from sales")->result();
+    }
+
 }
