@@ -33,9 +33,60 @@
                     <h6 class="m-0 font-weight-bold ">Data Buku Besar</h6>
                 </div>
 
+                <div class="card-body">
+                    <?= $this->session->flashdata("msg") ?>
 
 
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <tr class="text-center">
+                                <th>No.</th>
+                                <th>Tanggal</th>
+                                <th>Keterangan</th>
+                                <th>ref</th>
+                                <th>Debit</th>
+                                <th>Kredit</th>
+                            </tr>
+                            <?php
+                            $no = 1;
+                            $total_kredit = 0;
+                            $total_debit = 0;
+                            ?>
+                            <?php foreach ($data['kas'] as $d) : ?>
 
+                                <tr>
+                                    <td><?= $no ?></td>
+                                    <td><?= $d->tgl_jurnal ?></td>
+                                    <td><?= $d->nama_coa ?></td>
+                                    <td></td>
+                                    <?php if ($d->posisi_dr_cr == 'debit') : ?> 
+
+                                        <td><?= 'Rp' . number_format($d->nominal) ?></td> 
+                                        <td> <?= '' ?> </td>
+                                        <!-- kalo misalkan akun bertambah di sisi debit bikin totalnya disini! -->
+                                        <?php $total_debit += $d->nominal ?>
+
+                                    <?php else : ?>
+                                        <td> <?= '' ?></td>
+                                        <td class="text-right"><?= 'Rp' . number_format($d->nominal) ?></td>
+                                        <!-- kalo misalkan akun bertambah di sisi kredit bikin totalnya disini! -->
+                                        <?php $total_kredit += $d->nominal ?>
+
+                                    <?php endif; ?>
+                                </tr>
+
+
+                            <?php $no++;
+                            endforeach; ?>
+                            <tr>
+                                <td colspan="4" class="text-center">Total</td>
+                                <td><?= 'Rp' . number_format($total_debit) ?></td>
+                                <td class="text-right"><?= 'Rp' . number_format($total_kredit) ?></td>
+                            </tr>
+
+                        </table>
+                    </div>
+                </div>
 
                 <div class="card-body">
                     <?= $this->session->flashdata("msg") ?>
@@ -63,16 +114,16 @@
                                     <td><?= $d->tgl_jurnal ?></td>
                                     <td><?= $d->nama_coa ?></td>
                                     <td></td>
-                                    <?php if ($d->posisi_dr_cr == 'debet') : ?>
+                                    <?php if ($d->posisi_dr_cr == 'kredit') : ?>
 
-                                        <td><?= number_format($d->nominal) ?></td>
+                                        <td><?='Rp' . number_format($d->nominal) ?></td>
                                         <td> <?= '' ?> </td>
                                         <!-- kalo misalkan akun bertambah di sisi debit bikin totalnya disini! -->
                                         <?php $total_debit += $d->nominal ?>
 
                                     <?php else : ?>
                                         <td> <?= '' ?></td>
-                                        <td><?= number_format($d->nominal) ?></td>
+                                        <td><?= 'Rp' . number_format($d->nominal) ?></td>
                                         <!-- kalo misalkan akun bertambah di sisi kredit bikin totalnya disini! -->
                                         <?php $total_kredit += $d->nominal ?>
 
@@ -84,11 +135,122 @@
                             endforeach; ?>
                             <tr>
                                 <td colspan="4" class="text-center">Total</td>
-                                <td><?= number_format($total_debit) ?></td>
-                                <td><?= number_format($total_kredit) ?></td>
+                                <td><?= 'Rp' . number_format($total_debit) ?></td>
+                                <td><?= 'Rp' . number_format($total_kredit) ?></td>
                             </tr>
 
                         </table>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <?= $this->session->flashdata("msg") ?>
+
+
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <tr class="text-center">
+                                <th>No.</th>
+                                <th>Tanggal</th>
+                                <th>Keterangan</th>
+                                <th>ref</th>
+                                <th>Debit</th>
+                                <th>Kredit</th>
+                            </tr>
+                            <?php
+                            $no = 1;
+                            $total_kredit = 0;
+                            $total_debit = 0;
+                            ?>
+                            <?php foreach ($data['pembelian'] as $d) : ?>
+
+                                <tr>
+                                    <td><?= $no ?></td>
+                                    <td><?= $d->tgl_jurnal ?></td>
+                                    <td><?= $d->nama_coa ?></td>
+                                    <td></td>
+                                    <?php if ($d->posisi_dr_cr == 'debet') : ?>
+
+                                        <td><?= 'Rp' . number_format($d->nominal) ?></td>
+                                        <td> <?= '' ?> </td>
+                                        <!-- kalo misalkan akun bertambah di sisi debit bikin totalnya disini! -->
+                                        <?php $total_debit += $d->nominal ?>
+
+                                    <?php else : ?>
+                                        <td><?= 'Rp' . number_format($d->nominal) ?></td>
+                                        <td> <?= '' ?></td>
+                                        <?php $total_kredit += $d->nominal ?>
+                                        <!-- kalo misalkan akun bertambah di sisi kredit bikin totalnya disini! -->
+
+                                    <?php endif; ?>
+                                </tr>
+
+
+                            <?php $no++;
+                            endforeach; ?>
+                            <tr>
+                                <td colspan="4" class="text-center">Total</td>
+                                <td><?= 'Rp' . number_format($total_kredit) ?></td>
+                                <td><?='Rp' . number_format($total_debit) ?></td>
+                            </tr>
+
+                        </table>
+
+                    <div class="card-body">
+                    <?= $this->session->flashdata("msg") ?>
+
+
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <tr class="text-center">
+                                <th>No.</th>
+                                <th>Tanggal</th>
+                                <th>Keterangan</th>
+                                <th>ref</th>
+                                <th>Debit</th>
+                                <th>Kredit</th>
+                            </tr>
+                            <?php
+                            $no = 1;
+                            $total_kredit = 0;
+                            $total_debit = 0;
+                            ?>
+                            <?php foreach ($data['retur pembelian'] as $d) : ?>
+
+                                <tr>
+                                    <td><?= $no ?></td>
+                                    <td><?= $d->tgl_jurnal ?></td>
+                                    <td><?= $d->nama_coa ?></td>
+                                    <td></td>
+                                    <?php if ($d->posisi_dr_cr == 'kredit') : ?>
+
+                                        <td><?= 'Rp' . number_format($d->nominal) ?></td>
+                                        <td> <?= '' ?> </td>
+                                        <!-- kalo misalkan akun bertambah di sisi debit bikin totalnya disini! -->
+                                        <?php $total_debit += $d->nominal ?>
+
+                                    <?php else : ?>
+                                        <td> <?= '' ?></td>
+                                        <td><?= 'Rp' . number_format($d->nominal) ?></td>
+                                        <!-- kalo misalkan akun bertambah di sisi kredit bikin totalnya disini! -->
+                                        <?php $total_kredit += $d->nominal ?>
+
+                                    <?php endif; ?>
+                                </tr>
+
+
+                            <?php $no++;
+                            endforeach; ?>
+                            <tr>
+                                <td colspan="4" class="text-center">Total</td>
+                                <td><?= 'Rp' . number_format($total_debit) ?></td>
+                                <td><?= 'Rp' . number_format($total_kredit) ?></td>
+                            </tr>
+
+                        </table>
+                    </div>
+                </div>
+
 
 
                     </div>

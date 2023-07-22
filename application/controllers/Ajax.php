@@ -8,7 +8,6 @@ class Ajax extends CI_Controller {
 
   public function getcoa() {
     $coa = $this->db->get("coa")->result();
-    
     echo json_encode($coa);
   }
   

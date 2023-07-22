@@ -74,7 +74,7 @@ class pembelian extends CI_Controller
 
 
         $obat = $this->obatModel->getDrugById((int)$this->input->post("id_drug"));
-        $obatStock=(int)$obat[0]['stock']-(int)$this->input->post("qty");
+        $obatStock=(int)$obat[0]['stock']+(int)$this->input->post("qty");
         $updateObat=['stock'=>$obatStock];
         $this->obatModel->update($obat[0]['id'],$updateObat);
 

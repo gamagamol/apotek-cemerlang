@@ -31,14 +31,19 @@ class penjualan extends CI_Controller
 
     public function insert()
     {
-
+        $harga= $this->input->post("harga_penjualan");
+        $arrHarga=explode('.',$harga);
+        $hrg='';
+        foreach($arrHarga as $h){
+            $hrg.=$h;
+        }
 
         $arrPenjualan = [
             "nota_num" => $this->input->post("nota_num"),
             "id_drug" => $this->input->post("id_drug"),
             "date" => $this->input->post("date"),
             "qty" => $this->input->post("qty"),
-            "harga_penjualan" => $this->input->post("harga_penjualan"),
+            "harga_penjualan" => $hrg,
             "total" => $this->input->post("total"),
         ];
         $this->penjualanModel->insert($arrPenjualan);
@@ -54,7 +59,7 @@ class penjualan extends CI_Controller
             'posisi_dr_cr'=>'debet'
         ];
         $arrJurnalKredit = [
-            'kode_coa' => 401,
+            'kode_coa' => 400,
             'id_transaksi' => $lastId,
             'tgl_jurnal' => $this->input->post("date"),
             'nominal' => $this->input->post("total"),

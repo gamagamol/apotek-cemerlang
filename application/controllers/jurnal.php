@@ -7,6 +7,7 @@ class jurnal extends CI_Controller
         parent::__construct();
 
         $this->load->model('jurnalModel');
+        $this->load->model('obatModel');
     }
 
     public function index()
@@ -35,7 +36,9 @@ class jurnal extends CI_Controller
     public function neracaSaldo()
     {
         $data['title'] = 'Admin | Neraca Saldo';
-        $data['data'] = $this->jurnalModel->neracaSaldo();
+        $data['data'] = $this->jurnalModel->labarugi();
+        $data['modal_awal'] = $this->jurnalModel->modal_awal();
+        $data['total_persediaan'] = $this->jurnalModel->total_persediaan();
         // print_r($data);die;
         $this->load->view('module/header', $data);
         $this->load->view('laporan/neracaSaldo', $data);
@@ -45,11 +48,23 @@ class jurnal extends CI_Controller
     public function persediaan()
     {
         $data['title'] = 'Admin | Persediaan';
-        $data['data'] = $this->jurnalModel->persediaan();
+        $data['data'] = $this->obatModel->index();
+        // print_r($data);die;
        
         $this->load->view('module/header', $data);
         $this->load->view('laporan/persediaan', $data);
         $this->load->view('module/footer');
+    }
+
+
+    public function getDataPersediaan($drug_id,$date=null){
+        if($date!=null){
+
+            echo json_encode($this->jurnalModel->persediaan($drug_id,$date));
+        }else{
+
+            echo json_encode($this->jurnalModel->persediaan($drug_id,$date));
+        }
     }
 
     public function penjualan()
@@ -79,6 +94,16 @@ class jurnal extends CI_Controller
        
         $this->load->view('module/header', $data);
         $this->load->view('purchase_return/laporan', $data);
+        $this->load->view('module/footer');
+    }
+
+    public function labarugi()
+    {
+        $data['title'] = 'Admin | labarugi';
+        $data['data'] = $this->jurnalModel->labarugi();
+       
+        $this->load->view('module/header', $data);
+        $this->load->view('laporan/labarugi', $data);
         $this->load->view('module/footer');
     }
 
