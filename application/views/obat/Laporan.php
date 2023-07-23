@@ -1,10 +1,8 @@
 <!-- Navbar -->
 <?php $this->load->view('module/navbar') ?>
 <!-- /.navbar -->
-
 <!-- Main Sidebar Container -->
 <?php $this->load->view('module/sidebar') ?>
-
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -23,39 +21,23 @@
         </div>
         <!-- /.container-fluid -->
     </section>
-
     <!-- Main content -->
     <section class="content">
         <!-- Default box -->
         <div class="container">
             <div class="card shadow mb-4">
                 <div class="card-header py-3 mt-2">
-                    <h6 class="m-0 font-weight-bold ">  </h6>
+                    <h6 class="m-0 font-weight-bold "> <?= $title ?> </h6>
                 </div>
-
-
-
-
                 <div class="card-body">
                     <?= $this->session->flashdata("msg") ?>
                     <div class="table-responsive">
-                    </div>
-                        <div class="col-md-3">
-                            <input type="month" name="date" id="date" class="form-control">
-                        </div>
-                        <div class="row mb-3">
-                        <div class="col text-center">
-                            <h1>Laporan Retur Pembelian</h1>
-                            <h3>Apotek Cemerlang</h3>
-                            <h5>Periode:<?= date('M-Y') ?></h5>
-                        </div>
-                    </div>
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <tr class="text-center">
                                 <th>No.</th>
                                 <th>Tanggal</th>
                                 <th>Nama Obat</th>
-                                <th>Total Retur Pembelian</th>
+                                <th>Total Pembelian</th>
 
                             </tr>
                             <?php
@@ -68,14 +50,10 @@
                                     <td><?= $d->date ?></td>
                                     <td><?= $d->name ?></td>
                                     <td><?= 'Rp' . number_format($d->total) ?></td>
-
-
-
                                 </tr>
                                 <?php
                                 $no++;
                                 $total += $d->total;
-
                                 ?>
                             <?php endforeach; ?>
                             <tr>

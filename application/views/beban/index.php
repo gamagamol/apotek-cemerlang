@@ -35,11 +35,8 @@
 
                 <form action="{{ url('COA') }}" method="get">
                     <div class="form-group col-md-6 ml-2 mt-2">
-                        <select name="cari" id="" class="form-control">
-
                         </select>
                     </div>
-                    <button type=submit name=submit class="btn btn-primary ml-4">submit</button>
                 </form>
 
 
@@ -134,8 +131,8 @@
                     </div>
                 </div>
                 <div class="modal-footer justify-content-between">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
-                    <button type="submit" id="btnaddbeban" class="btn btn-primary">Tambah</button>
+                <button type="button" class="btn btn-default" id="hitung">Kalkulasi</button>
+                <button type="submit" id="btnadddrug" class="btn btn-primary" hidden>Tambah</button>
                 </div>
             </form>
         </div>
@@ -144,6 +141,7 @@
     <!-- /.modal-dialog -->
 </div>
 
+<<<<<<< HEAD
 <!-- <script>
     $(document).ready(function() {
         $('#tambah').click(function() {
@@ -151,3 +149,5 @@
         })
     })
 </script> -->
+=======
+>>>>>>> 5cc9b4a14e17f48d8ed98fc95af4250b124a4f09

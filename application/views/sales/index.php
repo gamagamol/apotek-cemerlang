@@ -34,11 +34,9 @@
                 </div>
                 <form action="{{ url('COA') }}" method="get">
                     <div class="form-group col-md-6 ml-2 mt-2">
-                        <select name="cari" id="" class="form-control">
 
                         </select>
                     </div>
-                    <button type=submit name=submit class="btn btn-primary ml-4">submit</button>
                 </form>
 
 
@@ -175,7 +173,7 @@
     <!-- /.modal-dialog -->
 </div>
 
-<script>
+<!-- <script>
     $('#harga').mask('000.000.000.000.000', {
         reverse: true
     });
@@ -241,4 +239,4 @@
 
 
     })
-</script>
+</script> -->

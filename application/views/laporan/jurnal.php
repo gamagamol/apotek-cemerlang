@@ -30,7 +30,7 @@
         <div class="container">
             <div class="card shadow mb-4">
                 <div class="card-header py-3 mt-2">
-                    <h6 class="m-0 font-weight-bold ">Data Jurnal</h6>
+                    <h6 class="m-0 font-weight-bold "></h6>
                 </div>
 
 
@@ -40,6 +40,10 @@
                 <div class="card-body">
                     <?= $this->session->flashdata("msg") ?>
 
+                    </div>
+                        <div class="col-md-3">
+                            <input type="month" name="date" id="date" class="form-control">
+                        </div>
                     <div class="row mb-3">
                         <div class="col text-center">
                             <h1>Jurnal Umum</h1>
@@ -47,6 +51,7 @@
                             <h5>Periode:<?= date('M-Y') ?></h5>
                         </div>
                     </div>
+                    
 
                     <div class="table-responsive">
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -76,7 +81,7 @@
                                     <td></td>
                                     <?php if ($d->posisi_dr_cr == 'debet') : ?>
 
-                                        <td><?= number_format($d->nominal) ?></td>
+                                        <td><?= 'Rp' . number_format($d->nominal) ?></td>
                                         <td> <?= '' ?> </td>
                                         <?php $total_debit += $d->nominal;            ?>
                                     <?php else : ?>

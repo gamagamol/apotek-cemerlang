@@ -49,7 +49,12 @@ class penjualan extends CI_Controller
 
     public function insert()
     {
-
+        $harga= $this->input->post("harga_penjualan");
+        $arrHarga=explode('.',$harga);
+        $hrg='';
+        foreach($arrHarga as $h){
+            $hrg.=$h;
+        }
 
         $arrPenjualan = [];
         $totalKeseluruhan = 0;
@@ -84,7 +89,7 @@ class penjualan extends CI_Controller
             'posisi_dr_cr' => 'debet'
         ];
         $arrJurnalKredit = [
-            'kode_coa' => 401,
+            'kode_coa' => 400,
             'id_transaksi' => $lastId,
             'tgl_jurnal' => $this->input->post("date")[0],
             'nominal' => $totalKeseluruhan,

@@ -27,11 +27,22 @@
         <div class="container">
             <div class="card shadow mb-4">
                 <div class="card-header py-3 mt-2">
-                    <h6 class="m-0 font-weight-bold "> <?= $title ?> </h6>
+                    <h6 class="m-0 font-weight-bold "> </h6>
                 </div>
                 <div class="card-body">
                     <?= $this->session->flashdata("msg") ?>
                     <div class="table-responsive">
+                    </div>
+                        <div class="col-md-3">
+                            <input type="month" name="date" id="date" class="form-control">
+                        </div>
+                        <div class="row mb-3">
+                        <div class="col text-center">
+                            <h1>Laporan Perubahan Modal</h1>
+                            <h3>Apotek Cemerlang</h3>
+                            <h5>Periode:<?= date('M-Y') ?></h5>
+                        </div>
+                    </div>
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <tr class="text-center">
                         
@@ -55,7 +66,7 @@
 
                     </tr>
                     <tr class="text-center">
-                       <th>Total modal</th>
+                       <th>Total</th>
                       <th><?=  'Rp'.number_format($data[0]->modal_awal + $data[0]->bertambah - $data[0]->berkurang)  ?></th>
                       </tr>
                           
@@ -69,7 +80,7 @@
                         $modal = $data[0]->modal_awal + $data[0]->bertambah - $data[0]->berkurang;
 
                         ?>
-                        <th>Total modal </th>
+                        <th>Modal Akhir </th>
 
                         <?php if ($laba_rugi > 0) : ?>
                             <th><?= 'Rp'.number_format($laba_rugi + $modal) ?></th>

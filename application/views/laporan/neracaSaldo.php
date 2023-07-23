@@ -7,94 +7,77 @@
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item active">
-                        </li>
-                    </ol>
-                </div>
-            </div>
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
         </div>
-        <!-- /.container-fluid -->
-    </section>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item active">
+            </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </section>
 
-    <!-- Main content -->
-    <section class="content">
-        <!-- Default box -->
-        <div class="container">
-            <div class="card shadow mb-4">
-                <div class="card-header py-3 mt-2">
-                    <h6 class="m-0 font-weight-bold ">Data Neraca Saldo</h6>
-                </div>
-
-
-
-
-
-                <div class="card-body">
-                    <?= $this->session->flashdata("msg") ?>
-
-
-                    <div class="table-responsive">
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                            <tr class="text-center">
-                                <th>No.</th>
-                                <th>Nama Akun</th>
-                                <th>Debit</th>
-                                <th>Kredit</th>
-                            </tr>
-                            <?php
-                            $no = 1;
-                            $total_kredit = 0;
-                            $total_debit = 0;
-                            ?>
-                            <?php foreach ($data as $d) : ?>
-
-                                <tr>
-                                    <td><?= $no ?></td>
-                                    <td><?= $d->nama_coa ?></td>
-                                    <?php if ($d->posisi_dr_cr == 'debet') : ?>
-
-                                        <td><?= number_format($d->total) ?></td>
-                                        <td> <?= '' ?> </td>
-                                        <?php $total_debit += $d->total ?>
-
-                                    <?php else : ?>
-                                        <td> <?= '' ?></td>
-                                        <td><?= number_format($d->total) ?></td>
-                                        <?php $total_kredit += $d->total ?>
-
-                                    <?php endif; ?>
+  <!-- Main content -->
+  <section class="content">
+    <!-- Default box -->
+    <div class="container">
+      <div class="card shadow mb-4">
+        <div class="card-header py-3 mt-2">
+          <h6 class="m-0 font-weight-bold "></h6>
+        </div>
+        
 
 
-
-                                </tr>
-
-
-                            <?php $no++;
-                            endforeach; ?>
-                            <tr>
-                                <td colspan="2" class="text-center">Total</td>
-                                <td><?= number_format($total_debit) ?></td>
-                                <td><?= number_format($total_kredit) ?></td>
-                            </tr>
-
-                        </table>
-
-
+        <div class="card-body">
+          <?= $this->session->flashdata("msg") ?>
+          <table class="table table-bordered text-center">
+          </div>
+                        <div class="col-md-3">
+                            <input type="month" name="date" id="date" class="form-control">
+                        </div>
+                        <div class="row mb-3">
+                        <div class="col text-center">
+                            <h1>Neraca Saldo</h1>
+                            <h3>Apotek Cemerlang</h3>
+                            <h5>Periode:<?= date('M-Y') ?></h5>
+                        </div>
                     </div>
-                </div>
-            </div>
-        </div>
-        <!-- /.card -->
+            <tr>
+              <td colspan='2'> Aktiva Lancar</td>
+              <td colspan='2'> Ekuitas</td>
+            </tr>
+            <tr>
+              <td>Persediaan</td>
+              <td><?='Rp' . number_format ($total_persediaan)?></td>
+              <td>Modal Awal </td>
+              <td><?='Rp' . number_format ($modal_awal)?></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td>Laba</td>
+              <td><?= 'Rp' . number_format ($data[0]->totalpenjualan-$data[0]->totalbeban)?></td>
+            </tr>
+            <tr>
+            <td colspan='2'> <?='Rp' . number_format($total_persediaan)?></td>
+            <td colspan='2'> <?= 'Rp' . number_format($modal_awal-$data[0]->totalpenjualan-$data[0]->totalbeban)?></td>
+            </tr>
+          </table>
 
-    </section>
-    <!-- /.content -->
+
+        </div>
+      </div>
+    </div>
+    <!-- /.card -->
+
+  </section>
+  <!-- /.content -->
 </div>
-<!-- /.content-wrapper -->
+<!-- /.content-wrapper --

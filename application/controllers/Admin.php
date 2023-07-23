@@ -5,13 +5,13 @@ class Admin extends CI_Controller {
 
   public function __construct() {
     parent::__construct();
+
     $this->load->model('apotek_models');
     $this->clear_cache();
     $this->cek_login();
   }
 
   // Custom Function apotek
-  // test
   function cek_login() {
     if ($this->session->login === null) {
       redirect("auth");

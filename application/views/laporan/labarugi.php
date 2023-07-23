@@ -30,16 +30,25 @@
         <div class="container">
             <div class="card shadow mb-4">
                 <div class="card-header py-3 mt-2">
-                    <h6 class="m-0 font-weight-bold ">Laba Rugi</h6>
+                    <h6 class="m-0 font-weight-bold "></h6>
                 </div>
-
-
 
 
 
                 <div class="card-body">
                     <?= $this->session->flashdata("msg") ?>
                     <table class="table">
+                    </div>
+                        <div class="col-md-3">
+                            <input type="month" name="date" id="date" class="form-control">
+                        </div>
+                        <div class="row mb-3">
+                        <div class="col text-center">
+                            <h1>Laba Rugi</h1>
+                            <h3>Apotek Cemerlang</h3>
+                            <h5>Periode:<?= date('M-Y') ?></h5>
+                        </div>
+                    </div>
     <tr>
         <td>Penjualan</td>
         <td>:</td>

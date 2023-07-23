@@ -95,7 +95,7 @@
                         </div>
                     </div>
                     <div class="modal-footer justify-content-between">
-                        <button type="button" class="btn btn-default" id="hitung">Tmbah</button>
+                        <button type="button" class="btn btn-default" id="hitung">Tambah</button>
                     </div>
                     <!-- </form> -->
                     <form action="<?= base_url('penjualan/insert') ?>" method="post">

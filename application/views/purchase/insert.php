@@ -42,7 +42,11 @@
                             <div>
                                 <div class="form-group">
                                     <label for="addnama_obat">No Nota</label>
+<<<<<<< HEAD
                                     <input type="text" class="form-control" name="nota_num" id="nota_num" value="<?= $no_nota ?>" readonly required>
+=======
+                                    <input type="text" class="form-control" name="nota_num" id='nota_num' value="<?= $no_nota ?>" readonly required>
+>>>>>>> 5cc9b4a14e17f48d8ed98fc95af4250b124a4f09
                                 </div>
 
                             </div>
@@ -55,6 +59,7 @@
                             </div>
                             <div>
                                 <div class="form-group">
+<<<<<<< HEAD
                                     <label for="addsatuan">Nama suppliers</label>
 
                                     <select name="id_suppliers" id="id_suppliers" class="form-control">
@@ -73,6 +78,15 @@
 
                                     <select name="id_drug" id="id_drug" class="form-control">
 
+=======
+                                    <label for="addsatuan">Nama Obat</label>
+
+                                    <select name="id_drug" id="id_drug" class="form-control">
+                                        <option value="">Pilih Obat</option>
+                                        <?php foreach ($obat as $b) : ?>
+                                            <option value="<?= $b->id_obat ?>"><?= $b->name ?></option>
+                                        <?php endforeach; ?>
+>>>>>>> 5cc9b4a14e17f48d8ed98fc95af4250b124a4f09
 
                                     </select>
                                 </div>
@@ -109,6 +123,10 @@
                         </div>
                         <div class="modal-footer justify-content-between">
                             <button type="button" class="btn btn-default" id="hitung">Kalkulasi</button>
+<<<<<<< HEAD
+=======
+                            <!-- <button type="submit" id="btnadddrug" class="btn btn-primary" hidden>Tambah</button> -->
+>>>>>>> 5cc9b4a14e17f48d8ed98fc95af4250b124a4f09
                         </div>
                     </div>
                     <div class="modal-footer justify-content-between">

@@ -17,11 +17,11 @@ class jurnalModel extends CI_Model
         $this->db->insert('jurnal', $jurnalKredit);
     }
 
-    public function jurnal()
+    public function jurnal($tgl = null)
     {
         return $this->db
             ->query("select tgl_jurnal,nama_coa,posisi_dr_cr,nominal from jurnal
-                     left join coa on coa.kode_coa =jurnal.kode_coa")
+                     left join coa on coa.kode_coa =jurnal.kode_coa order by id_jurnal")
             ->result();
     }
     public function bukubesar($tgl)
@@ -42,35 +42,40 @@ class jurnalModel extends CI_Model
             ->query("select tgl_jurnal,nama_coa,posisi_dr_cr,nominal from jurnal
                      left join coa on coa.kode_coa =jurnal.kode_coa where coa.kode_coa=500")
             ->result();
-
-
-        return [
-            'penjualan' =>    $penjualan,
-            // 'pembelian' =>    $pembelian,
-        ];
-    }
-
-    public function saldoAwal($tgl)
-    {
-        $tgl = explode('-', $tgl);
-
-
-        $penjualan
+        $pembelian
             = $this->db
-            ->query("SELECT sum(total) as saldo_awal FROM sales where month(date)=($tgl[1]-1); ")
+            ->query("select tgl_jurnal,nama_coa,posisi_dr_cr,nominal from jurnal
+                     left join coa on coa.kode_coa =jurnal.kode_coa where coa.kode_coa=500")
             ->result();
+        $retur_pembelian
+            = $this->db
+            ->query("select tgl_jurnal,nama_coa,posisi_dr_cr,nominal from jurnal
+                     left join coa on coa.kode_coa =jurnal.kode_coa where coa.kode_coa=501")
+            ->result();
+
+
         return [
+            'kas' =>    $kas,
             'penjualan' =>    $penjualan,
-            // 'pembelian' =>    $pembelian,
+            'pembelian' =>    $pembelian,
+            'retur pembelian' =>    $retur_pembelian,
         ];
     }
 
 
-    public function neracaSaldo()
+    public function neracaSaldo($tgl = null)
     {
+
+        {
+
+            $tgl = explode('-', $tgl);
+
+            $where = " where id = $drug_id and month(b.date)=$tgl[1] and year(b.date)=$tgl[0]";
+        }
+        
         return $this->db->query("SELECT nama_coa,sum(nominal) as total,posisi_dr_cr FROM apotek.jurnal j
             join apotek.coa c on j.kode_coa= c.kode_coa
-            where c.kode_coa=401
+            where c.kode_coa=400
             group by nama_coa,posisi_dr_cr
             union
             SELECT nama_coa,sum(nominal) as total,posisi_dr_cr FROM apotek.jurnal j
@@ -116,5 +121,11 @@ class jurnalModel extends CI_Model
     public function labarugi(){
         return $this->db->query("SELECT sum(total) as totalpenjualan, (select sum(total) from beban) as totalbeban from sales")->result();
     }
+    public function modal_awal(){
+        return $this->db->query("select total from modal where nama_modal='modal_awal'")->result()[0]->total;
+        }
+    public function total_persediaan(){
+            return $this->db->query("select SUM( (select sum(total) from sales where id_drug =b.id) - (select sum(total) from purchase where id_drug =b.id) - (select sum(total) from purchase_return where id_drug =b.id) ) as total_persediaan from (select id from drugs)b ")->result()[0]->total_persediaan;
+            }
 
 }

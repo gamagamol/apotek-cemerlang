@@ -67,6 +67,10 @@ class retur_pembelian extends CI_Controller
             array_push($arrReturpembelian, $Returpembelian);
         }
 
+        $data['title'] = 'Admin | Retur Pembelian';
+        $data['data'] = $this->retur_pembelianModel->index();
+        $data['no_nota'] = $this->retur_pembelianModel->no_nota();
+        $data['obat'] = $this->obatModel->index();
 
 
         $lastId = $this->retur_pembelianModel->insert($arrReturpembelian);
@@ -81,8 +85,8 @@ class retur_pembelian extends CI_Controller
         $arrJurnalKredit = [
             'kode_coa' => 501,
             'id_transaksi' => $lastId,
-            'tgl_jurnal' => $this->input->post("date"),
-            'nominal' => $this->input->post("total"),
+            'tgl_jurnal' => $this->input->post("date")[0],
+            'nominal' => $totalKeseluruhan,
             'posisi_dr_cr' => 'kredit'
 
         ];
