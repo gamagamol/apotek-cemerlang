@@ -42,7 +42,7 @@
                             <div>
                                 <div class="form-group">
                                     <label for="addnama_obat">No Nota</label>
-                                    <input type="text" class="form-control" name="nota_num" id='nota_num' value="<?= $no_nota ?>" readonly required>
+                                    <input type="text" class="form-control" name="nota_num" id="nota_num" value="<?= $no_nota ?>" readonly required>
                                 </div>
 
                             </div>
@@ -55,13 +55,24 @@
                             </div>
                             <div>
                                 <div class="form-group">
+                                    <label for="addsatuan">Nama suppliers</label>
+
+                                    <select name="id_suppliers" id="id_suppliers" class="form-control">
+                                        <option value="">Pilih Supplier</option>
+                                        <?php foreach ($supplier as $b) : ?>
+                                            <option value="<?= $b->id ?>"><?= $b->name ?></option>
+                                        <?php endforeach; ?>
+
+                                    </select>
+                                </div>
+
+                            </div>
+                            <div>
+                                <div class="form-group">
                                     <label for="addsatuan">Nama Obat</label>
 
                                     <select name="id_drug" id="id_drug" class="form-control">
-                                        <option value="">Pilih Obat</option>
-                                        <?php foreach ($obat as $b) : ?>
-                                            <option value="<?= $b->id_obat ?>"><?= $b->name ?></option>
-                                        <?php endforeach; ?>
+
 
                                     </select>
                                 </div>
@@ -98,7 +109,6 @@
                         </div>
                         <div class="modal-footer justify-content-between">
                             <button type="button" class="btn btn-default" id="hitung">Kalkulasi</button>
-                            <!-- <button type="submit" id="btnadddrug" class="btn btn-primary" hidden>Tambah</button> -->
                         </div>
                     </div>
                     <div class="modal-footer justify-content-between">
@@ -277,33 +287,28 @@
             })
         })
 
+        $('#id_suppliers').change(function() {
+            let url = '<?= base_url('pembelian/getDrugsBysupplier') ?>'
 
-        // $('#btnadddrug').click(function() {
+            id = $(this).val()
+            $.ajax({
+                url: `${url}/${id}`,
+                type: 'GET',
 
-        //     data = {
-        //         'nota_num': $('#nota_num').val(),
-        //         'id_drug': $('#arr_id_drug').val(),
-        //         'date': $('#arr_date').val(),
-        //         'qty': $('#arr_qty').val(),
-        //         'harga_pembelian': $('#arr_harga_pembelian').val(),
-        //         'total': $('#arr_total').val(),
-        //     }
+                dataType: 'json',
+                success: function(data) {
+                    html = '<option>Pilih obat</option>'
 
-        //     console.log(data);
+                    data.data.map((d) => {
+                        html += `<option value='${d.id}'>${d.name}</option>`
+                    })
+                   
 
-        //     // $.ajax({
+                    $('#id_drug').html(html)
+                }
+            })
+        })
 
-        //     //     url: ``,
-        //     //     type: '',
-        //     //     data: {
-
-        //     //     },
-        //     //     dataType: 'json',
-        //     //     success: function(data) {
-
-        //     //     }
-        //     // })
-        // })
 
 
 
