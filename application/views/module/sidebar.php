@@ -151,7 +151,7 @@
               <li class="nav-item">
                 <a href="<?= base_url('jurnal') ?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Jurnal</p>
+                  <p>Jurnal Umum</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -176,6 +176,12 @@
                 <a href="<?= base_url('jurnal/labarugi') ?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Laba Rugi</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= base_url('modal/perubahan_modal') ?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Perubahan Modal</p>
                 </a>
               </li>
             </ul>

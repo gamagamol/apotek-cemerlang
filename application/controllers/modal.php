@@ -67,4 +67,14 @@ class modal extends CI_Controller
         $this->session->set_flashdata("msg", "<div class='alert alert-success'>modal baru anda berhasil ditambahkan</div>");
         redirect("modal");
     }
+    public function perubahan_modal (){
+        $data['title'] = 'Admin | modal';
+        $data['data'] = $this->modalModel->perubahan_modal();
+        $data['labarugi'] = $this->jurnalModel->labarugi();
+
+        $this->load->view('module/header', $data);
+        $this->load->view('modal/perubahan_modal', $data);
+        $this->load->view('module/footer');
+    }
+
 }

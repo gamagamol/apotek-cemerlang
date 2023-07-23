@@ -118,8 +118,11 @@
                     </div>
                     <div>
                         <div class="form-group">
-                            <label for="addnama_modal">Nama modal</label>
-                            <input type="text" class="form-control" name="nama_modal" required>
+                            <label for="addnama_modal">Jenis modal</label>
+                            <select name="nama_modal" id="nama_modal" class="form-control">
+                                <option value="bertambah">bertambah</option>
+                                <option value="berkurang">berkurang</option>
+                            </select>
                         </div>
 
                     </div>

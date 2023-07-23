@@ -26,6 +26,11 @@ class modalModel extends CI_Model
             ->result();
     }
 
-
+    public function perubahan_modal()
+    {
+        return $this->db
+            ->query("select DISTINCT (select sum(total) from modal where nama_modal='modal_awal ') as modal_awal,(select sum(total) from modal where nama_modal='bertambah ') as bertambah, (select sum(total) from modal where nama_modal='berkurang') as berkurang from modal")
+            ->result();
+    }
 
 }

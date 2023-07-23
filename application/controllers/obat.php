@@ -71,4 +71,18 @@ class obat extends CI_Controller
         $this->session->set_flashdata("msg", "<div class='alert alert-success'>Obat baru dengan nama " . $nama_obat . " dan kode " . $kode_obat . " diubah</div>");
         redirect("obat");
     }
+
+    public function laporan()
+    {
+        $data = [
+            'title' => 'Laporan Obat',
+            'data' => $this->obatModel->laporan(),
+        ];
+        // print_r($data);
+        $this->load->view('module/header', $data);
+        $this->load->view('obat/laporan', $data);
+        $this->load->view('module/footer');
+    }
+
 }
+

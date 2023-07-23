@@ -30,24 +30,24 @@
         <div class="container">
             <div class="card shadow mb-4">
                 <div class="card-header py-3 mt-2">
-                    <h6 class="m-0 font-weight-bold ">Data Penjualan</h6>
+                    <h6 class="m-0 font-weight-bold ">Data Retur Pembelian</h6>
                 </div>
 
                 <div class="card-body">
-                    <!-- <form action="<?= base_url('penjualan/insert') ?>" method="POST"> -->
+                    <!-- <form action="<?= base_url('retur_pembelian/insert') ?>" method="POST"> -->
                     <div class="modal-body">
 
                         <div>
                             <div class="form-group">
                                 <label for="addnama_obat">No Nota</label>
-                                <input type="text" class="form-control" name="nota_num" value="<?= $no_nota ?>" readonly required>
+                                <input type="text" class="form-control" name="nota_num" id="nota_num" value="<?= $no_nota ?>" readonly required>
                             </div>
 
                         </div>
                         <div>
                             <div class="form-group">
-                                <label for="addnama_obat">Tanggal Penjualan</label>
-                                <input type="date" class="form-control" name="date" required>
+                                <label for="addnama_obat">Tanggal Retur Pembelian</label>
+                                <input type="date" class="form-control" name="date" id="date" required>
                             </div>
 
                         </div>
@@ -74,21 +74,21 @@
                         </div>
                         <div>
                             <div class="form-group">
-                                <label for="addnama_obat">Harga Penjualan</label>
-                                <input type="text" class="form-control" name="harga_penjualan" id="harga" required>
+                                <label for="addnama_obat">Harga Retur Pembelian</label>
+                                <input type="text" class="form-control" name="harga_retur_pembelian" id="harga" required>
                             </div>
 
                         </div>
                         <div>
                             <div class="form-group">
-                                <label for="addnama_obat">Jumlah Penjualan</label>
+                                <label for="addnama_obat">Jumlah Retur Pembelian</label>
                                 <input type="text" class="form-control" name="qty" id="jumlah" required>
                             </div>
 
                         </div>
                         <div>
                             <div class="form-group">
-                                <label for="addnama_obat">Total Penjualan</label>
+                                <label for="addnama_obat">Total Retur Pembelian</label>
                                 <input type="int" class="form-control" name="total" id="total" readonly>
                             </div>
 
@@ -96,22 +96,37 @@
                     </div>
                     <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-default" id="hitung">Tmbah</button>
-                        <button type="button" id="btnadddrug" class="btn btn-primary" hidden>Submit</button>
                     </div>
                     <!-- </form> -->
+                    <form action="<?= base_url('retur_pembelian/insert') ?>" method="post">
 
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <td>Tanggal Obat</td>
-                                <td>Nama Obat</td>
-                                <td>Qty</td>
-                                <td>harga</td>
-                                <td>jumlah</td>
-                                <td>subtotal</td>
-                            </tr>
-                        </thead>
-                    </table>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <td>Tanggal Obat</td>
+                                    <td>Nama Obat</td>
+                                    <td>Qty</td>
+                                    <td>harga</td>
+                                    <td>subtotal</td>
+                                </tr>
+                            </thead>
+                            <tbody id="tbody">
+
+                            </tbody>
+                            <tbody id="footer">
+
+                            </tbody>
+                        </table>
+
+                        <div class="row">
+                            <div class="col-md-3">
+                                <button type="submit" id="btnadddrug" class="btn btn-primary" hidden>Submit</button>
+
+                            </div>
+                        </div>
+
+                    </form>
+
                 </div>
             </div>
         </div>
@@ -134,6 +149,7 @@
         reverse: true
     });
     $(document).ready(function() {
+        let totalKesluruhan = 0
 
 
         $('#hitung').click(function() {
@@ -160,34 +176,78 @@
                 $('#btnadddrug').attr('hidden', true)
 
             } else {
-                total = parseInt(harga) * parseInt(jumlah)
+                let total = parseInt(harga) * parseInt(jumlah)
                 $('#total').val(total)
                 $('#btnadddrug').removeAttr('hidden')
 
+                let date = $('#date').val()
+                let nota_num = $('#nota_num').val()
+                let id_drug = $('#id_drug').val()
+                let nama_obat = $('#id_drug option:selected').text()
+                let harga_retur_pembelian = $('#harga').val()
 
-                html = ` <input type="text" class="form-control" name="nota_num[]" required>
 
-                `
+                html = ``
+
+                html += '<tr>'
+
+
                 html += `
-                <input type="date" class="form-control" name="date[]" required>
+                <td hidden>
+                <input type="text" class="form-control" name="nota_num[]" id='arr_nota_num' required value='${nota_num}' readonly hidden>
+                </td>
                 
                 `
                 html += `
-                <input type="text" class="form-control" name="id_drug[]" required>
+                <td>
+                <input type="date" class="form-control" name="date[]" id='arr_date' required value='${date}' readonly>
+                </td>
                 
                 `
                 html += `
-                <input type="text" class="form-control" name="stock[]" required>
+                <td>
+                <input type="text" class="form-control" name="id_drug[]" id='arr_id_drug'required value='${id_drug}' hidden>
+                <input type="text" class="form-control"  value='${nama_obat}' readonly >
+                </td>
                 
                 `
+
                 html += `
-                <input type="text" class="form-control" name="harga_penjualan[]" required>
+                <td>
+
+                <input type="text" class="form-control" name="arr_jumlah[]" id='arr_jumlah' required value='${jumlah}' readonly>
+                </td>
                 
                 `
+
                 html += `
-                <input type="int" class="form-control" name="total[]" required>
+                <td>
+
+                <input type="text" class="form-control" name="harga_retur_pembelian[]" id='arr_harga_retur_pembelian' required value='${harga_retur_pembelian}' readonly>
+                </td>
                 
                 `
+
+
+                html += `
+                <td>
+
+                <input type="text" class="form-control" name="total[]" id='arr_total' required value='${total}' readonly>
+                </td>
+                
+                `
+
+                html += '</tr>'
+                totalKesluruhan += total
+
+                html1 = `<tr>
+                <td colspan='4' class='text-center'>Total</td>
+                <td>${totalKesluruhan}</td>
+                </tr>`
+
+
+                $('#tbody').append(html)
+                $('#footer').html(html1)
 
             }
 
@@ -199,7 +259,7 @@
         $('#id_drug').change(function() {
 
             $.ajax({
-                url: '<?= base_url() ?>penjualan/getStock',
+                url: '<?= base_url() ?>retur_pembelian/getStock',
                 type: 'POST',
                 data: {
                     id_drug: $(this).val()
@@ -210,6 +270,35 @@
                 }
             })
         })
+
+
+        // $('#btnadddrug').click(function() {
+
+        //     data = {
+        //         'nota_num': $('#nota_num').val(),
+        //         'id_drug': $('#arr_id_drug').val(),
+        //         'date': $('#arr_date').val(),
+        //         'qty': $('#arr_qty').val(),
+        //         'harga_penjualan': $('#arr_harga_penjualan').val(),
+        //         'total': $('#arr_total').val(),
+        //     }
+
+        //     console.log(data);
+
+        //     // $.ajax({
+
+        //     //     url: ``,
+        //     //     type: '',
+        //     //     data: {
+
+        //     //     },
+        //     //     dataType: 'json',
+        //     //     success: function(data) {
+
+        //     //     }
+        //     // })
+        // })
+
 
 
     })

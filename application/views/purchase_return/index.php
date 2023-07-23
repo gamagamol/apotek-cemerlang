@@ -45,7 +45,7 @@
                 <div class="card-body">
                     <?= $this->session->flashdata("msg") ?>
 
-                    <a href="#" class="btn btn-primary ml-1 mt-3 mb-3" id="tambah"> <i class="fas fa-plus-circle me-1  " style="letter-spacing: 2px"></i> Tambah </a>
+                    <a href="<?= base_url('retur_pembelian/create') ?>" class="btn btn-primary ml-1 mt-3 mb-3" id="tambah"> <i class="fas fa-plus-circle me-1  " style="letter-spacing: 2px"></i> Tambah </a>
                     <div class="table-responsive">
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <tr class="text-center">
@@ -173,7 +173,7 @@
     <!-- /.modal-dialog -->
 </div>
 
-<script>
+<!-- <script>
     $('#harga').mask('000.000.000.000.000', {
         reverse: true
     });
@@ -239,4 +239,4 @@
 
 
     })
-</script>
+</script> -->

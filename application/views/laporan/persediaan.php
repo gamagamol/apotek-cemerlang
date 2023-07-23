@@ -30,7 +30,7 @@
         <div class="container">
             <div class="card shadow mb-4">
                 <div class="card-header py-3 mt-2">
-                    <h6 class="m-0 font-weight-bold ">Stok Obat</h6>
+                    <h6 class="m-0 font-weight-bold "></h6>
                 </div>
 
 
@@ -51,6 +51,12 @@
                         </div>
                         <div class="col-md-3">
                             <input type="month" name="date" id="date" class="form-control">
+                        </div>
+                    </div>
+                        <div class="col text-center">
+                            <h1>Kartu Stok Obat</h1>
+                            <h3>Apotek Cemerlang</h3>
+                            <h5>Periode:<?= date('M-Y') ?></h5>
                         </div>
                     </div>
 

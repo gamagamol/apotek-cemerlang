@@ -44,7 +44,7 @@
                 <div class="card-body">
                     <?= $this->session->flashdata("msg") ?>
 
-                    <a href="#" class="btn btn-primary ml-1 mt-3 mb-3" id="tambah"> <i class="fas fa-plus-circle me-1  " style="letter-spacing: 2px"></i> Tambah </a>
+                    <a href="<?= base_url('beban/create') ?>" class="btn btn-primary ml-1 mt-3 mb-3" id="tambah"> <i class="fas fa-plus-circle me-1  " style="letter-spacing: 2px"></i> Tambah </a>
                     <div class="table-responsive">
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <tr class="text-center">
@@ -131,8 +131,8 @@
                     </div>
                 </div>
                 <div class="modal-footer justify-content-between">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
-                    <button type="submit" id="btnaddbeban" class="btn btn-primary">Tambah</button>
+                <button type="button" class="btn btn-default" id="hitung">Kalkulasi</button>
+                <button type="submit" id="btnadddrug" class="btn btn-primary" hidden>Tambah</button>
                 </div>
             </form>
         </div>
@@ -141,10 +141,3 @@
     <!-- /.modal-dialog -->
 </div>
 
-<script>
-    $(document).ready(function() {
-        $('#tambah').click(function() {
-            $('#add').modal('show')
-        })
-    })
-</script>

@@ -17,24 +17,30 @@ class jurnalModel extends CI_Model
         $this->db->insert('jurnal', $jurnalKredit);
     }
 
-    public function jurnal()
+    public function jurnal($tgl = null)
     {
         return $this->db
             ->query("select tgl_jurnal,nama_coa,posisi_dr_cr,nominal from jurnal
                      left join coa on coa.kode_coa =jurnal.kode_coa order by id_jurnal")
             ->result();
     }
-    public function bukubesar()
+    public function bukubesar($tgl)
     {
-        $kas
-        = $this->db
-        ->query("select tgl_jurnal,nama_coa,posisi_dr_cr,nominal from jurnal
-                 left join coa on coa.kode_coa =jurnal.kode_coa where coa.kode_coa=101")
-        ->result();
+
+        $tgl = explode('-', $tgl);
+      
+
         $penjualan
             = $this->db
             ->query("select tgl_jurnal,nama_coa,posisi_dr_cr,nominal from jurnal
-                     left join coa on coa.kode_coa =jurnal.kode_coa where coa.kode_coa=401")
+                     left join coa on coa.kode_coa =jurnal.kode_coa where coa.kode_coa=401
+                     and month(tgl_jurnal)='$tgl[1]' and year(tgl_jurnal)='$tgl[0]' ")
+            ->result();
+
+        $pembelian
+            = $this->db
+            ->query("select tgl_jurnal,nama_coa,posisi_dr_cr,nominal from jurnal
+                     left join coa on coa.kode_coa =jurnal.kode_coa where coa.kode_coa=500")
             ->result();
         $pembelian
             = $this->db
@@ -57,8 +63,16 @@ class jurnalModel extends CI_Model
     }
 
 
-    public function neracaSaldo()
+    public function neracaSaldo($tgl = null)
     {
+
+        {
+
+            $tgl = explode('-', $tgl);
+
+            $where = " where id = $drug_id and month(b.date)=$tgl[1] and year(b.date)=$tgl[0]";
+        }
+        
         return $this->db->query("SELECT nama_coa,sum(nominal) as total,posisi_dr_cr FROM apotek.jurnal j
             join apotek.coa c on j.kode_coa= c.kode_coa
             where c.kode_coa=400
@@ -68,21 +82,20 @@ class jurnalModel extends CI_Model
             join apotek.coa c on j.kode_coa= c.kode_coa
             where c.kode_coa=101
             group by nama_coa,posisi_dr_cr")->result();
-            
     }
 
-    public function persediaan($drug_id,$tgl=null){
-        $where =" where id =$drug_id ";
-    
-        if($tgl!=null){
+    public function persediaan($drug_id, $tgl = null)
+    {
+        $where = " where id =$drug_id ";
 
-            $tgl=explode('-',$tgl);
+        if ($tgl != null) {
 
-            $where=" where id = $drug_id and month(b.date)=$tgl[1] and year(b.date)=$tgl[0]";
-           
+            $tgl = explode('-', $tgl);
+
+            $where = " where id = $drug_id and month(b.date)=$tgl[1] and year(b.date)=$tgl[0]";
         }
 
-     
+
 
         return $this->db->query("select * from (
                     select d.id,p.qty,p.harga_pembelian,p.total,p.date,c.nama_coa from drugs d

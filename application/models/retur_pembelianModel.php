@@ -13,7 +13,8 @@ class retur_pembelianModel extends CI_Model
     }
     public function insert($data)
     {
-        $this->db->insert('purchase_return', $data);
+        $this->db->insert_batch('purchase_return', $data);
+        return $this->db->insert_id();
     }
 
     public function MaxId(){

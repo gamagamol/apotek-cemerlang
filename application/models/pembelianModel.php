@@ -13,7 +13,8 @@ class pembelianModel extends CI_Model
     }
     public function insert($data)
     {
-        $this->db->insert('purchase', $data);
+        $this->db->insert_batch('purchase', $data);
+        return $this->db->insert_id();
     }
 
     public function MaxId(){
