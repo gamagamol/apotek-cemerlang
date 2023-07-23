@@ -30,23 +30,7 @@ class pembelian extends CI_Controller
         $this->load->view('purchase/index', $data);
         $this->load->view('module/footer');
     }
-    public function create()
-    {
-
-        $data['title'] = 'Admin | Pembelian';
-        $data['data'] = $this->pembelianModel->index();
-        $data['no_nota'] = $this->pembelianModel->no_nota();
-        $data['obat'] = $this->obatModel->index();
-        
-        $arrNoNota = explode('/', $data['no_nota'][0]->nota_num);
-        $tahun = date('Y');
-        $lastId = (int)$arrNoNota[3] + 1;
-        $data['no_nota'] = "cemerlang/pembelian/$tahun/$lastId";
-       
-        $this->load->view('module/header', $data);
-        $this->load->view('purchase/insert', $data);
-        $this->load->view('module/footer');
-    }
+ 
     public function create()
     {
 
@@ -112,11 +96,6 @@ class pembelian extends CI_Controller
 
         $lastId = $this->pembelianModel->insert($arrPembelian);
 
-<<<<<<< HEAD
-
-=======
-     
->>>>>>> 5cc9b4a14e17f48d8ed98fc95af4250b124a4f09
 
         $arrJurnalDebet = [
             'kode_coa' => 500,
