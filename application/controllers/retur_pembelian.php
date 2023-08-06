@@ -9,6 +9,7 @@ class retur_pembelian extends CI_Controller
         $this->load->model('retur_pembelianModel');
         $this->load->model('obatModel');
         $this->load->model('jurnalModel');
+        $this->load->model('pembelianModel');
     }
 
     public function index()
@@ -19,10 +20,8 @@ class retur_pembelian extends CI_Controller
         $data['no_nota'] = $this->retur_pembelianModel->no_nota();
         $data['obat'] = $this->obatModel->index();
 
-        // $arrNoNota = explode('/', $data['no_nota'][0]->nota_num);
-        // $tahun = date('Y');
-        // $lastId = (int)$arrNoNota[3] + 1;
-        // $data['no_nota'] = "cemerlang/retur_pembelian/$tahun/$lastId";
+
+
 
         $this->load->view('module/header', $data);
         $this->load->view('purchase_return/index', $data);
@@ -35,6 +34,9 @@ class retur_pembelian extends CI_Controller
         $data['data'] = $this->retur_pembelianModel->index();
         $data['no_nota'] = $this->retur_pembelianModel->no_nota();
         $data['obat'] = $this->obatModel->index();
+        $data['no_pembelian'] = $this->retur_pembelianModel->no_purchase();
+
+
 
         $arrNoNota = explode('/', $data['no_nota'][0]->nota_num);
         $tahun = date('Y');
@@ -57,14 +59,17 @@ class retur_pembelian extends CI_Controller
                 "id_drug" => $this->input->post("id_drug")[$i],
                 "date" => $this->input->post("date")[$i],
                 "qty" => $this->input->post("arr_jumlah")[$i],
-                "harga_Pembelian" => $this->input->post("harga_retur_pembelian")[$i],
+                "harga_retur_pembelian" => $this->input->post("harga_retur_pembelian")[$i],
                 "total" => $this->input->post("total")[$i],
             ];
-           
+
+            // print_r($Returpembelian);die;
+        
+
             $totalKeseluruhan += $this->input->post("total")[$i];
             $totalStockKepake += $this->input->post("arr_jumlah")[$i];
 
-            array_push($arrReturpembelian, $Returpembelian);
+            array_push($arrReturPembelian, $Returpembelian);
         }
 
         $data['title'] = 'Admin | Retur Pembelian';
@@ -73,13 +78,13 @@ class retur_pembelian extends CI_Controller
         $data['obat'] = $this->obatModel->index();
 
 
-        $lastId = $this->retur_pembelianModel->insert($arrReturpembelian);
+        $lastId = $this->retur_pembelianModel->insert($arrReturPembelian);
 
         $arrJurnalDebet = [
             'kode_coa' => 101,
             'id_transaksi' => $lastId,
-            'tgl_jurnal' => $this->input->post("date"),
-            'nominal' => $this->input->post("total"),
+            'tgl_jurnal' => $this->input->post("date")[0],
+            'nominal' => $totalKeseluruhan,
             'posisi_dr_cr' => 'debet'
         ];
         $arrJurnalKredit = [
@@ -120,5 +125,12 @@ class retur_pembelian extends CI_Controller
         $id_drug = $this->input->post('id_drug');
         $data = $this->obatModel->getDrugById((int)$id_drug);
         echo json_encode($data);
+    }
+
+
+    public function findPurchase()
+    {
+        $no_pembelian=$this->input->post('no_pembelian');
+        echo json_encode($this->retur_pembelianModel->findPurchase($no_pembelian));
     }
 }

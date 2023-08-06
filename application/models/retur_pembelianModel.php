@@ -9,7 +9,8 @@ class retur_pembelianModel extends CI_Model
 
 
         return $this->db->query('select purchase_return.id,nota_num,date,d.name,harga_retur_pembelian,qty,total from purchase_return
-                                join drugs d on d.id = purchase_return.id_drug')->result();
+                                join drugs d on d.id = purchase_return.id_drug
+                                group by nota_num ')->result();
     }
     public function insert($data)
     {
@@ -37,6 +38,16 @@ class retur_pembelianModel extends CI_Model
         join apotek.drugs d on s.id_drug=d.id
         ) b ORDER BY b.date ASC
         ")->result();
+    }
+
+    public function no_purchase(){
+        return $this->db->query("select nota_num from purchase group by nota_num")->result();
+    }
+
+    public function findPurchase($no_pembelian){
+        return $this->db->query("select purchase.*,name from purchase 
+                                left join drugs on purchase.id_drug=drugs.id
+                                where nota_num='$no_pembelian'")->result();
     }
 
 

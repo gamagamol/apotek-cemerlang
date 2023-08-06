@@ -53,56 +53,56 @@
                             <input type="month" name="date" id="date" class="form-control">
                         </div>
                     </div>
-                        <div class="col text-center">
-                            <h1>Kartu Stok Obat</h1>
-                            <h3>Apotek Cemerlang</h3>
-                            <h5>Periode:<?= date('M-Y') ?></h5>
-                        </div>
+                    <div class="col text-center">
+                        <h1>Kartu Stok Obat</h1>
+                        <h3>Apotek Cemerlang</h3>
+                        <h5>Periode:<?= date('M-Y') ?></h5>
                     </div>
+                </div>
 
 
 
-                    <div class="table-responsive">
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                            <thead>
-                                <tr class="text-center">
-                                    <th rowspan="2" class="text-center">No.</th>
-                                    <th rowspan="2" class="text-center">Keterangan.</th>
-                                    <th colspan="3">Pembelian</th>
-                                    <th colspan="3">Penjualan</th>
-                                    <th colspan="3">Persediaan</th>
-                                </tr>
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr class="text-center">
+                                <th rowspan="2" class="text-center">No.</th>
+                                <th rowspan="2" class="text-center">Keterangan.</th>
+                                <th colspan="3">Pembelian</th>
+                                <th colspan="3">Penjualan</th>
+                                <th colspan="3">Persediaan</th>
+                            </tr>
 
-                                <tr>
-                                    <td>Unit</td>
-                                    <td>Harga</td>
-                                    <td>Jumlah</td>
-                                    <td>Unit</td>
-                                    <td>Harga</td>
-                                    <td>Jumlah</td>
-                                    <td>Unit</td>
-                                    <td>Harga</td>
-                                    <td>Jumlah</td>
-                                </tr>
-                            </thead>
+                            <tr>
+                                <td>Unit</td>
+                                <td>Harga</td>
+                                <td>Jumlah</td>
+                                <td>Unit</td>
+                                <td>Harga</td>
+                                <td>Jumlah</td>
+                                <td>Unit</td>
+                                <td>Harga</td>
+                                <td>Jumlah</td>
+                            </tr>
+                        </thead>
 
-                            <tbody id="tBodytable">
+                        <tbody id="tBodytable">
 
-                            </tbody>
-
-
-
-                        </table>
+                        </tbody>
 
 
-                    </div>
+
+                    </table>
+
+
                 </div>
             </div>
         </div>
-        <!-- /.card -->
+</div>
+<!-- /.card -->
 
-    </section>
-    <!-- /.content -->
+</section>
+<!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
 
@@ -115,7 +115,7 @@
         })
 
         $('#date').change(function() {
-         
+
             getData($('#id_obat').val(), $(this).val())
         })
 
@@ -127,7 +127,7 @@
                 url = `${base_url}jurnal/getDataPersediaan/${id_obat}/${date}`
             }
 
-      
+
 
 
             $.ajax({
@@ -158,8 +158,12 @@
                                 unit_total_persedian.push(d.qty)
                                 harga_total_persedian.push(d.harga_pembelian)
                                 total_persedian.push(d.total)
+
+
+
                                 html += `<td>${unit_total_persedian.map((u)=>`${u}<br>`)}</td>`
-                                html += `<td>${harga_total_persedian.map((u)=>`${u}<br>`)}</td>`
+                                html += `<td>${harga_total_persedian.map((u)=>`${ u}<br>`)}</td>`
+
                                 html += `<td>${total_persedian.map((u)=>`${u}<br>`)}</td>`
 
                             } else if (d.nama_coa == 'penjualan') {
@@ -189,6 +193,7 @@
 
                                 html += `<td>${unit_total_persedian.map((u)=>`${u}<br>`)}</td>`
                                 html += `<td>${harga_total_persedian.map((u)=>`${u}<br>`)}</td>`
+                              
                                 html += `<td>${total_persedian.map((u)=>`${u}<br>`)}</td>`
                             } else if (d.nama_coa == 'retur pembelian') {
                                 unit = parseInt(d.qty)
@@ -218,10 +223,13 @@
                                 }
 
 
+                           
 
 
                                 html += `<td>${unit_total_persedian.map((u)=>`${u}<br>`)}</td>`
                                 html += `<td>${harga_total_persedian.map((u)=>`${new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 3 }).format(u)}<br>`)}</td>`
+                      
+
                                 html += `<td>${total_persedian.map((u)=>`${new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 3 }).format(u)}<br>`)}</td>`
 
                             }
