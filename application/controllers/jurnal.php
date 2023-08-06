@@ -16,9 +16,18 @@ class jurnal extends CI_Controller
     public function index()
     {
 
-        $data['title'] = 'Admin | Jurnal';
-        $data['data'] = $this->jurnalModel->jurnal();
-        // print_r($data);die;
+        $tgl = $this->input->get('tgl');
+        if ($tgl) {
+            $date = explode('-', $tgl);
+            $data['title'] = 'Admin | Jurnal';
+            $data['data'] = $this->jurnalModel->jurnal($date);
+        } else {
+            $data['title'] = 'Admin | Jurnal';
+            $data['data'] = $this->jurnalModel->jurnal();
+        }
+
+
+
 
         $this->load->view('module/header', $data);
         $this->load->view('laporan/jurnal', $data);
@@ -30,20 +39,21 @@ class jurnal extends CI_Controller
     {
 
         $data['title'] = 'Admin | Buku Besar';
-        // $data['data'] = $this->jurnalModel->bukubesar();
-        // $data['saldo_awal'] = $this->jurnalModel->saldoAwal();
-        
+
+
 
         $this->load->view('module/header', $data);
         $this->load->view('laporan/bukubesar', $data);
         $this->load->view('module/footer');
     }
 
-    public function buku_besarAjax($tgl){
-        // $data['data'] = $this->jurnalModel->bukubesar();
+    public function buku_besarAjax($tgl)
+    {
+
+
         echo json_encode([
-            'data'=>$this->jurnalModel->bukubesar($tgl),
-            'saldo_awal'=> $this->jurnalModel->saldoAwal($tgl)
+            'data' => $this->jurnalModel->bukubesar($tgl),
+            'saldo_awal' => $this->jurnalModel->saldoAwal($tgl)
         ]);
     }
 
@@ -52,13 +62,17 @@ class jurnal extends CI_Controller
     public function neracaSaldo()
     {
         $data['title'] = 'Admin | Neraca Saldo';
-        $data['data'] = $this->jurnalModel->labarugi();
-        $data['modal_awal'] = $this->jurnalModel->modal_awal();
-        $data['total_persediaan'] = $this->jurnalModel->total_persediaan();
+
         // print_r($data);die;
         $this->load->view('module/header', $data);
         $this->load->view('laporan/neracaSaldo', $data);
         $this->load->view('module/footer');
+    }
+
+
+    public function neracaSaldoAjax($tgl)
+    {
+        echo json_encode($this->jurnalModel->neracaSaldo($tgl));
     }
 
     public function persediaan()
@@ -66,20 +80,21 @@ class jurnal extends CI_Controller
         $data['title'] = 'Admin | Persediaan';
         $data['data'] = $this->obatModel->index();
         // print_r($data);die;
-       
+
         $this->load->view('module/header', $data);
         $this->load->view('laporan/persediaan', $data);
         $this->load->view('module/footer');
     }
 
 
-    public function getDataPersediaan($drug_id,$date=null){
-        if($date!=null){
+    public function getDataPersediaan($drug_id, $date = null)
+    {
+        if ($date != null) {
 
-            echo json_encode($this->jurnalModel->persediaan($drug_id,$date));
-        }else{
+            echo json_encode($this->jurnalModel->persediaan($drug_id, $date));
+        } else {
 
-            echo json_encode($this->jurnalModel->persediaan($drug_id,$date));
+            echo json_encode($this->jurnalModel->persediaan($drug_id, $date));
         }
     }
 
@@ -117,10 +132,9 @@ class jurnal extends CI_Controller
     {
         $data['title'] = 'Admin | labarugi';
         $data['data'] = $this->jurnalModel->labarugi();
-       
+
         $this->load->view('module/header', $data);
         $this->load->view('laporan/labarugi', $data);
         $this->load->view('module/footer');
     }
-
 }

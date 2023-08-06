@@ -32,52 +32,85 @@
         <div class="card-header py-3 mt-2">
           <h6 class="m-0 font-weight-bold "></h6>
         </div>
-        
+
 
 
         <div class="card-body">
           <?= $this->session->flashdata("msg") ?>
           <table class="table table-bordered text-center">
-          </div>
-                        <div class="col-md-3">
-                            <input type="month" name="date" id="date" class="form-control">
-                        </div>
-                        <div class="row mb-3">
-                        <div class="col text-center">
-                            <h1>Neraca Saldo</h1>
-                            <h3>Apotek Cemerlang</h3>
-                            <h5>Periode:<?= date('M-Y') ?></h5>
-                        </div>
-                    </div>
-            <tr>
-              <td colspan='2'> Aktiva Lancar</td>
-              <td colspan='2'> Ekuitas</td>
-            </tr>
-            <tr>
-              <td>Persediaan</td>
-              <td><?='Rp' . number_format ($total_persediaan)?></td>
-              <td>Modal Awal </td>
-              <td><?='Rp' . number_format ($modal_awal)?></td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-              <td>Laba</td>
-              <td><?= 'Rp' . number_format ($data[0]->totalpenjualan-$data[0]->totalbeban)?></td>
-            </tr>
-            <tr>
-            <td colspan='2'> <?='Rp' . number_format($total_persediaan)?></td>
-            <td colspan='2'> <?= 'Rp' . number_format($modal_awal-$data[0]->totalpenjualan-$data[0]->totalbeban)?></td>
-            </tr>
-          </table>
-
-
         </div>
+        <div class="col-md-3">
+          <input type="month" name="date" id="date" class="form-control">
+        </div>
+        <div class="row mb-3">
+          <div class="col text-center">
+            <h1>Neraca Saldo</h1>
+            <h3>Apotek Cemerlang</h3>
+            <h5>Periode:<?= date('M-Y') ?></h5>
+          </div>
+        </div>
+
+
+
+        <tr>
+          <td> Kode Akun</td>
+          <td> Nama Akun</td>
+          <td>Debet</td>
+          <td>Kredit</td>
+        </tr>
+
+
+        <tbody id="tbody">
+
+        </tbody>
+
+        </table>
+
+
+
       </div>
     </div>
-    <!-- /.card -->
-
-  </section>
-  <!-- /.content -->
 </div>
-<!-- /.content-wrapper --
+<!-- /.card -->
+
+</section>
+<!-- /.content -->
+</div>
+
+
+<script>
+  $(document).ready(function() {
+    $('#date').change(function() {
+      let base_url = '<?= base_url() ?>'
+      let tgl = $(this).val()
+
+      $.ajax({
+        url: `${base_url}jurnal/neracaSaldoAjax/${tgl}`,
+        type: 'GET',
+        dataType: 'json',
+        success: function(data) {
+
+          html = ''
+          data.map((d) => {
+            html += `  <tr>`
+            html += `<td>${d.kode_coa}</td>`
+            html += `<td>${d.nama_coa}</td>`
+            if (d.kode_coa == 401) {
+
+              html += `<td></td>`
+              html += `<td>${d.total}</td>`
+            } else if (d.kode_coa == 500) {
+
+              html += `<td>${d.total}</td>`
+              html += `<td></td>`
+            }
+            html += `  </tr>`
+          })
+
+
+          $('#tbody').html(html)
+        }
+      })
+    })
+  })
+</script>

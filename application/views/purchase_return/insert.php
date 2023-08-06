@@ -46,59 +46,30 @@
                         </div>
                         <div>
                             <div class="form-group">
-                                <label for="addnama_obat">Tanggal Retur Pembelian</label>
-                                <input type="date" class="form-control" name="date" id="date" required>
-                            </div>
-
-                        </div>
-                        <div>
-                            <div class="form-group">
-                                <label for="addsatuan">Nama Obat</label>
-
-                                <select name="id_drug" id="id_drug" class="form-control">
-                                    <option value="">Pilih Obat</option>
-                                    <?php foreach ($obat as $b) : ?>
-                                        <option value="<?= $b->id_obat ?>"><?= $b->name ?></option>
-                                    <?php endforeach; ?>
-
+                                <label for="addnama_obat">No Pembelian</label>
+                                <select name="no_pembelian" id="no_pembelian" class="form-control">
+                                    <option value="">pilih no pembelian</option>
+                                    <?php foreach ($no_pembelian as $np) :    ?>
+                                        <option value="<?= $np->nota_num ?>"><?= $np->nota_num ?></option>
+                                    <?php endforeach;    ?>
                                 </select>
                             </div>
 
                         </div>
                         <div>
                             <div class="form-group">
-                                <label for="stock">Stock Obat</label>
-                                <input type="text" class="form-control" name="stock" id="stock" readonly>
+                                <label for="addnama_obat">Tanggal Retur Pembelian</label>
+                                <input type="date" class="form-control" name="date" id="date" required>
                             </div>
 
                         </div>
-                        <div>
-                            <div class="form-group">
-                                <label for="addnama_obat">Harga Retur Pembelian</label>
-                                <input type="text" class="form-control" name="harga_retur_pembelian" id="harga" required>
-                            </div>
 
-                        </div>
-                        <div>
-                            <div class="form-group">
-                                <label for="addnama_obat">Jumlah Retur Pembelian</label>
-                                <input type="text" class="form-control" name="qty" id="jumlah" required>
-                            </div>
 
-                        </div>
-                        <div>
-                            <div class="form-group">
-                                <label for="addnama_obat">Total Retur Pembelian</label>
-                                <input type="int" class="form-control" name="total" id="total" readonly>
-                            </div>
-
-                        </div>
                     </div>
-                    <div class="modal-footer justify-content-between">
-                        <button type="button" class="btn btn-default" id="hitung">Tmbah</button>
-                    </div>
+
                     <!-- </form> -->
                     <form action="<?= base_url('retur_pembelian/insert') ?>" method="post">
+                        <button class="btn btn-primary my-3" hidden id="btn-submit">Submit</button>
 
                         <table class="table table-bordered">
                             <thead>
@@ -246,7 +217,7 @@
                 </tr>`
 
 
-                $('#tbody').append(html)
+                $('#tbody').html(html)
                 $('#footer').html(html1)
 
             }
@@ -272,7 +243,87 @@
         })
 
 
-   
+        $('#no_pembelian').change(function() {
+            let no_pembelian = $(this).val()
+            let nota_num = $('#nota_num').val()
+            $('#btn-submit').removeAttr('hidden')
+
+            $.ajax({
+
+                url: `<?= base_url() ?>retur_pembelian/findPurchase`,
+                type: 'POST',
+                data: {
+                    no_pembelian: no_pembelian
+                },
+                dataType: 'json',
+                success: function(data) {
+                    html = ``
+                    let totalKesluruhan = 0
+                    data.map((d) => {
+                        html += '<tr>'
+
+
+                        html += `
+                <td hidden>
+                <input type="text" class="form-control" name="nota_num[]" id='arr_nota_num' required value='${nota_num}' readonly hidden>
+                </td>
+                
+                `
+                        html += `
+                <td>
+                <input type="date" class="form-control" name="date[]" id='arr_date' required value='${d.date}' readonly>
+                </td>
+                
+                `
+                        html += `
+                <td>
+                <input type="text" class="form-control" name="id_drug[]" id='arr_id_drug'required value='${d.id_drug}' hidden>
+                <input type="text" class="form-control"  value='${d.name}' readonly >
+                </td>
+                
+                `
+
+                        html += `
+                <td>
+
+                <input type="text" class="form-control" name="arr_jumlah[]" id='arr_jumlah' required value='${d.qty}' readonly>
+                </td>
+                
+                `
+
+                        html += `
+                <td>
+
+                <input type="text" class="form-control" name="harga_retur_pembelian[]" id='arr_harga_retur_pembelian' required value='${d.harga_pembelian}' readonly>
+                </td>
+                
+                `
+
+
+                        html += `
+                <td>
+
+                <input type="text" class="form-control" name="total[]" id='arr_total' required value='${d.total}' readonly>
+                </td>
+                
+                `
+
+                        html += '</tr>'
+
+                        totalKesluruhan += parseInt(d.total)
+                    })
+
+                    html1 = `<tr>
+                <td colspan='4' class='text-center'>Total</td>
+                <td>${totalKesluruhan}</td>
+                </tr>`
+
+
+                    $('#tbody').html(html)
+                    $('#footer').html(html1)
+                }
+            })
+        })
 
 
 
