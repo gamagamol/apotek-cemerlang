@@ -123,12 +123,12 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <a href="<?= base_url('obat/laporan') ?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Obat</p>
                 </a>
-              </li>
+              </li> -->
               <li class="nav-item">
                 <a href="<?= base_url('pembelian/laporan') ?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>

@@ -9,6 +9,7 @@ class pembelian extends CI_Controller
         $this->load->model('pembelianModel');
         $this->load->model('obatModel');
         $this->load->model('jurnalModel');
+        $this->load->model('suppliersModel');
     }
 
     public function index()
@@ -18,6 +19,7 @@ class pembelian extends CI_Controller
         $data['data'] = $this->pembelianModel->index();
         $data['no_nota'] = $this->pembelianModel->no_nota();
         $data['obat'] = $this->obatModel->index();
+    
 
         // $arrNoNota = explode('/', $data['no_nota'][0]->nota_num);
         // $tahun = date('Y');
@@ -28,6 +30,7 @@ class pembelian extends CI_Controller
         $this->load->view('purchase/index', $data);
         $this->load->view('module/footer');
     }
+ 
     public function create()
     {
 
@@ -35,12 +38,15 @@ class pembelian extends CI_Controller
         $data['data'] = $this->pembelianModel->index();
         $data['no_nota'] = $this->pembelianModel->no_nota();
         $data['obat'] = $this->obatModel->index();
-        
+        $data['supplier'] = $this->suppliersModel->index();
+
+     
+
         $arrNoNota = explode('/', $data['no_nota'][0]->nota_num);
         $tahun = date('Y');
         $lastId = (int)$arrNoNota[3] + 1;
         $data['no_nota'] = "cemerlang/pembelian/$tahun/$lastId";
-       
+
         $this->load->view('module/header', $data);
         $this->load->view('purchase/insert', $data);
         $this->load->view('module/footer');
@@ -90,7 +96,6 @@ class pembelian extends CI_Controller
 
         $lastId = $this->pembelianModel->insert($arrPembelian);
 
-     
 
         $arrJurnalDebet = [
             'kode_coa' => 500,
@@ -137,5 +142,13 @@ class pembelian extends CI_Controller
         $id_drug = $this->input->post('id_drug');
         $data = $this->obatModel->getDrugById((int)$id_drug);
         echo json_encode($data);
+    }
+
+
+    public function getDrugsBysupplier($id_supplier)
+    {
+        echo json_encode([
+            'data' => $this->obatModel->getDrugsBySupplier($id_supplier),
+        ]);
     }
 }

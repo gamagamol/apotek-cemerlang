@@ -207,7 +207,11 @@
 
             stock = parseInt($('#stock').val())
 
-            
+            if (jumlah > stock) {
+                alert("masukan Jumlah lebih sedikit")
+                $('#btnadddrug').attr('hidden', true)
+
+            } else {
                 total = parseInt(harga) * parseInt(jumlah)
                 $('#total').val(total)
                 $('#btnadddrug').removeAttr('hidden')

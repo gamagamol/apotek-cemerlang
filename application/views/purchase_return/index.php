@@ -44,8 +44,9 @@
 
                 <div class="card-body">
                     <?= $this->session->flashdata("msg") ?>
-
                     <a href="<?= base_url('retur_pembelian/create') ?>" class="btn btn-primary ml-1 mt-3 mb-3" id="tambah"> <i class="fas fa-plus-circle me-1  " style="letter-spacing: 2px"></i> Tambah </a>
+
+                    <!-- <a href="#" class="btn btn-primary ml-1 mt-3 mb-3" id="tambah"> <i class="fas fa-plus-circle me-1  " style="letter-spacing: 2px"></i> Tambah </a> -->
                     <div class="table-responsive">
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <tr class="text-center">
@@ -183,59 +184,59 @@
     $('#total').mask('000.000.000.000.000', {
         reverse: true
     });
-    $(document).ready(function() {
-        $('#tambah').click(function() {
-            $('#add').modal('show')
-        })
+    // $(document).ready(function() {
+    //     $('#tambah').click(function() {
+    //         $('#add').modal('show')
+    //     })
 
-        $('#hitung').click(function() {
-
-
-
-
-            arrHarga = $('#harga').val().split('.')
-            let harga = ''
-            arrHarga.map((h) => {
-                harga += h
-            })
-
-            arrJumlah = $('#jumlah').val().split('.')
-            let jumlah = ''
-            arrJumlah.map((j) => {
-                jumlah += j
-            })
-
-            stock = parseInt($('#stock').val())
-
-            if (jumlah > stock) {
-                alert("masukan Jumlah lebih sedikit")
-                $('#btnadddrug').attr('hidden',true)
-
-            } else {
-                total = parseInt(harga) * parseInt(jumlah)
-                $('#total').val(total)
-                $('#btnadddrug').removeAttr('hidden')
-            }
+    //     $('#hitung').click(function() {
 
 
 
-        })
+
+    //         arrHarga = $('#harga').val().split('.')
+    //         let harga = ''
+    //         arrHarga.map((h) => {
+    //             harga += h
+    //         })
+
+    //         arrJumlah = $('#jumlah').val().split('.')
+    //         let jumlah = ''
+    //         arrJumlah.map((j) => {
+    //             jumlah += j
+    //         })
+
+    //         stock = parseInt($('#stock').val())
+
+    //         if (jumlah > stock) {
+    //             alert("masukan Jumlah lebih sedikit")
+    //             $('#btnadddrug').attr('hidden',true)
+
+    //         } else {
+    //             total = parseInt(harga) * parseInt(jumlah)
+    //             $('#total').val(total)
+    //             $('#btnadddrug').removeAttr('hidden')
+    //         }
 
 
-        $('#id_drug').change(function() {
 
-            $.ajax({
-                url: '<?= base_url() ?>penjualan/getStock',
-                type: 'POST',
-                data: {
-                    id_drug: $(this).val()
-                },
-                dataType: 'json',
-                success: function(data) {
-                    $('#stock').val(data[0].stock)
-                }
-            })
-        })
+    //     })
+
+
+    //     $('#id_drug').change(function() {
+
+    //         $.ajax({
+    //             url: '<?= base_url() ?>penjualan/getStock',
+    //             type: 'POST',
+    //             data: {
+    //                 id_drug: $(this).val()
+    //             },
+    //             dataType: 'json',
+    //             success: function(data) {
+    //                 $('#stock').val(data[0].stock)
+    //             }
+    //         })
+    //     })
 
 
     })

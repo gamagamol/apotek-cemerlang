@@ -272,32 +272,7 @@
         })
 
 
-        // $('#btnadddrug').click(function() {
-
-        //     data = {
-        //         'nota_num': $('#nota_num').val(),
-        //         'id_drug': $('#arr_id_drug').val(),
-        //         'date': $('#arr_date').val(),
-        //         'qty': $('#arr_qty').val(),
-        //         'harga_penjualan': $('#arr_harga_penjualan').val(),
-        //         'total': $('#arr_total').val(),
-        //     }
-
-        //     console.log(data);
-
-        //     // $.ajax({
-
-        //     //     url: ``,
-        //     //     type: '',
-        //     //     data: {
-
-        //     //     },
-        //     //     dataType: 'json',
-        //     //     success: function(data) {
-
-        //     //     }
-        //     // })
-        // })
+   
 
 
 

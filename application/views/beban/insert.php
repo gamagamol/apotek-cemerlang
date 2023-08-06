@@ -124,8 +124,8 @@
     $(document).ready(function() {
         let totalKesluruhan = 0
         $('#hitung').click(function() {
-        $('#btnadddrug').removeAttr('hidden')
-        
+            $('#btnadddrug').removeAttr('hidden')
+
             let date = $('#date').val()
             let nota_num = $('#nota_num').val()
             let nama_beban = $('#beban').val()
