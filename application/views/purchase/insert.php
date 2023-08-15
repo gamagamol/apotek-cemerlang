@@ -71,7 +71,12 @@
                                 <div class="form-group">
                                     <label for="addsatuan">Nama Obat</label>
 
+                                    
                                     <select name="id_drug" id="id_drug" class="form-control">
+                                    <option value="">Pilih Obat</option>
+                                    <?php foreach ($obat as $b) : ?>
+                                        <option value="<?= $b->id_obat ?>"><?= $b->name ?></option>
+                                    <?php endforeach; ?>
 
 
                                     </select>
@@ -313,4 +318,4 @@
 
 
     })
-</script>
+</script> 

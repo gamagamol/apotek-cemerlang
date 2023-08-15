@@ -101,6 +101,19 @@
               html += `<td>${d.total}</td>`
             } else if (d.kode_coa == 500) {
 
+              html += `<td></td>`
+              html += `<td>${d.total}</td>`
+            } else if (d.kode_coa == 101) {
+
+              html += `<td></td>`
+              html += `<td>${d.total}</td>`
+            } else if (d.kode_coa == 501) {
+
+              html += `<td></td>`
+              html += `<td>${d.total}</td>`
+            } else if (d.kode_coa == 510) {
+
+
               html += `<td>${d.total}</td>`
               html += `<td></td>`
             }

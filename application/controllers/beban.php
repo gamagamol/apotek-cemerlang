@@ -72,20 +72,85 @@ class beban extends CI_Controller
         $lastId = $this->bebanModel->insert($arrbeban);
 
         $arrJurnalDebet = [
-            'kode_coa' => 101,
+            'kode_coa' => 510,
             'id_transaksi' => $lastId,
             'tgl_jurnal' => $this->input->post("date")[0],
             'nominal' => $totalKeseluruhan,
             'posisi_dr_cr' => 'debet'
         ];
         $arrJurnalKredit = [
-            'kode_coa' => 401,
+            'kode_coa' => 101,
             'id_transaksi' => $lastId,
             'tgl_jurnal' => $this->input->post("date")[0],
             'nominal' => $totalKeseluruhan,
             'posisi_dr_cr' => 'kredit'
 
         ];
+
+        $arrJurnalDebet = [
+            'kode_coa' => 511,
+            'id_transaksi' => $lastId,
+            'tgl_jurnal' => $this->input->post("date")[0],
+            'nominal' => $totalKeseluruhan,
+            'posisi_dr_cr' => 'debet'
+        ];
+        $arrJurnalKredit = [
+            'kode_coa' => 101,
+            'id_transaksi' => $lastId,
+            'tgl_jurnal' => $this->input->post("date")[0],
+            'nominal' => $totalKeseluruhan,
+            'posisi_dr_cr' => 'kredit'
+
+        ];
+
+        $arrJurnalDebet = [
+            'kode_coa' => 512,
+            'id_transaksi' => $lastId,
+            'tgl_jurnal' => $this->input->post("date")[0],
+            'nominal' => $totalKeseluruhan,
+            'posisi_dr_cr' => 'debet'
+        ];
+        $arrJurnalKredit = [
+            'kode_coa' => 101,
+            'id_transaksi' => $lastId,
+            'tgl_jurnal' => $this->input->post("date")[0],
+            'nominal' => $totalKeseluruhan,
+            'posisi_dr_cr' => 'kredit'
+
+        ];
+
+        $arrJurnalDebet = [
+            'kode_coa' => 513,
+            'id_transaksi' => $lastId,
+            'tgl_jurnal' => $this->input->post("date")[0],
+            'nominal' => $totalKeseluruhan,
+            'posisi_dr_cr' => 'debet'
+        ];
+        $arrJurnalKredit = [
+            'kode_coa' => 101,
+            'id_transaksi' => $lastId,
+            'tgl_jurnal' => $this->input->post("date")[0],
+            'nominal' => $totalKeseluruhan,
+            'posisi_dr_cr' => 'kredit'
+
+        ];
+
+        $arrJurnalDebet = [
+            'kode_coa' => 514,
+            'id_transaksi' => $lastId,
+            'tgl_jurnal' => $this->input->post("date")[0],
+            'nominal' => $totalKeseluruhan,
+            'posisi_dr_cr' => 'debet'
+        ];
+        $arrJurnalKredit = [
+            'kode_coa' => 101,
+            'id_transaksi' => $lastId,
+            'tgl_jurnal' => $this->input->post("date")[0],
+            'nominal' => $totalKeseluruhan,
+            'posisi_dr_cr' => 'kredit'
+
+        ];
+
 
         $this->jurnalModel->insert($arrJurnalDebet, $arrJurnalKredit);
 

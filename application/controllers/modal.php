@@ -52,7 +52,7 @@ class modal extends CI_Controller
             'posisi_dr_cr'=>'debet'
         ];
         $arrJurnalKredit = [
-            'kode_coa' => 401,
+            'kode_coa' => 310,
             'id_transaksi' => $lastId,
             'tgl_jurnal' => $this->input->post("date"),
             'nominal' => $this->input->post("total"),

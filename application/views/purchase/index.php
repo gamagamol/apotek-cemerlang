@@ -66,7 +66,7 @@
                                     <td> <?= $d->nota_num ?> </td>
                                     <td> <?= $d->date ?> </td>
                                     <td> <?= $d->name ?> </td>
-                                    <td><?= 'Rp' . number_format($d->harga_pembelian) ?></td>
+                                    <td><?= 'Rp' . number_format($d->harga_pembelian,3) ?></td>
                                     <td> <?= $d->qty ?> </td>
                                     <td><?= 'Rp' . number_format($d->total) ?></td>
 

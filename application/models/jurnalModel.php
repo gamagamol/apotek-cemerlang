@@ -45,6 +45,13 @@ class jurnalModel extends CI_Model
             $tgl = explode('-', $tgl);
         }
 
+        $kas
+            = $this->db
+            ->query("select tgl_jurnal,nama_coa,posisi_dr_cr,nominal from jurnal
+                     left join coa on coa.kode_coa =jurnal.kode_coa where coa.kode_coa=101
+                     and month(tgl_jurnal)='$tgl[1]' and year(tgl_jurnal)='$tgl[0]' ")
+            ->result();
+
         $penjualan
             = $this->db
             ->query("select tgl_jurnal,nama_coa,posisi_dr_cr,nominal from jurnal
@@ -56,26 +63,62 @@ class jurnalModel extends CI_Model
             = $this->db
             ->query("select tgl_jurnal,nama_coa,posisi_dr_cr,nominal from jurnal
                      left join coa on coa.kode_coa =jurnal.kode_coa where coa.kode_coa=500
-                     
-                     ")
+                     and month(tgl_jurnal)='$tgl[1]' and year(tgl_jurnal)='$tgl[0]' ")
             ->result();
-        $pembelian
-            = $this->db
-            ->query("select tgl_jurnal,nama_coa,posisi_dr_cr,nominal from jurnal
-                     left join coa on coa.kode_coa =jurnal.kode_coa where coa.kode_coa=500")
-            ->result();
+
         $retur_pembelian
             = $this->db
             ->query("select tgl_jurnal,nama_coa,posisi_dr_cr,nominal from jurnal
-                     left join coa on coa.kode_coa =jurnal.kode_coa where coa.kode_coa=501")
+                     left join coa on coa.kode_coa =jurnal.kode_coa where coa.kode_coa=501
+                     and month(tgl_jurnal)='$tgl[1]' and year(tgl_jurnal)='$tgl[0]' ")
+            ->result();
+
+        $modal
+            = $this->db
+            ->query("select tgl_jurnal,nama_coa,posisi_dr_cr,nominal from jurnal
+                     left join coa on coa.kode_coa =jurnal.kode_coa where coa.kode_coa=310
+                     and month(tgl_jurnal)='$tgl[1]' and year(tgl_jurnal)='$tgl[0]' ")
+            ->result();
+
+        $beban_gaji
+            = $this->db
+            ->query("select tgl_jurnal,nama_coa,posisi_dr_cr,nominal from jurnal
+                     left join coa on coa.kode_coa =jurnal.kode_coa where coa.kode_coa=510
+                     and month(tgl_jurnal)='$tgl[1]' and year(tgl_jurnal)='$tgl[0]' ")
+            ->result();
+
+        $beban_listrik
+            = $this->db
+            ->query("select tgl_jurnal,nama_coa,posisi_dr_cr,nominal from jurnal
+                     left join coa on coa.kode_coa =jurnal.kode_coa where coa.kode_coa=511
+                     and month(tgl_jurnal)='$tgl[1]' and year(tgl_jurnal)='$tgl[0]' ")
+            ->result();
+            
+        $beban_air
+            = $this->db
+            ->query("select tgl_jurnal,nama_coa,posisi_dr_cr,nominal from jurnal
+                     left join coa on coa.kode_coa =jurnal.kode_coa where coa.kode_coa=512
+                     and month(tgl_jurnal)='$tgl[1]' and year(tgl_jurnal)='$tgl[0]' ")
+            ->result();
+
+        $beban_perlengkapan
+            = $this->db
+            ->query("select tgl_jurnal,nama_coa,posisi_dr_cr,nominal from jurnal
+                     left join coa on coa.kode_coa =jurnal.kode_coa where coa.kode_coa=513
+                     and month(tgl_jurnal)='$tgl[1]' and year(tgl_jurnal)='$tgl[0]' ")
             ->result();
 
 
         return [
-            // 'kas' =>    $kas,
+            'kas' =>    $kas,
             'penjualan' =>    $penjualan,
             'pembelian' =>    $pembelian,
             'retur pembelian' =>    $retur_pembelian,
+            'modal' =>    $modal,
+            'beban gaji' =>    $beban_gaji,
+            'beban listrik' =>    $beban_listrik,
+            'beban air' =>    $beban_air,
+            'beban perlengkapan' =>    $beban_perlengkapan,
         ];
     }
 
@@ -154,9 +197,14 @@ class jurnalModel extends CI_Model
             = $this->db
             ->query("SELECT sum(total) as saldo_awal FROM sales where month(date)=($tgl[1]-1); ")
             ->result();
+
+        $pembelian
+            = $this->db
+            ->query("SELECT sum(total) as saldo_awal FROM sales where month(date)=($tgl[1]-1); ")
+            ->result();
         return [
             'penjualan' =>    $penjualan,
-            // 'pembelian' =>    $pembelian,
+            'pembelian' =>    $pembelian,
         ];
     }
 
