@@ -14,8 +14,14 @@ class jurnalModel extends CI_Model
     }
     public function insert($jurnalDebit, $jurnalKredit)
     {
-        $this->db->insert('jurnal', $jurnalDebit);
-        $this->db->insert('jurnal', $jurnalKredit);
+        $this->db->insert_batch('jurnal', $jurnalDebit);
+        $this->db->insert_batch('jurnal', $jurnalKredit);
+    }
+
+
+    public function insertJurnal($jurnal)
+    {
+        $this->db->insert_batch('jurnal', $jurnal);
     }
 
     public function jurnal($tgl = null)
@@ -34,13 +40,13 @@ class jurnalModel extends CI_Model
                      left join coa on coa.kode_coa =jurnal.kode_coa order by id_jurnal")
             ->result();
     }
-    public function bukubesar($tgl =null)
+    public function bukubesar($tgl = null)
     {
 
 
 
 
-        if($tgl){
+        if ($tgl) {
 
             $tgl = explode('-', $tgl);
         }
@@ -63,7 +69,8 @@ class jurnalModel extends CI_Model
             = $this->db
             ->query("select tgl_jurnal,nama_coa,posisi_dr_cr,nominal from jurnal
                      left join coa on coa.kode_coa =jurnal.kode_coa where coa.kode_coa=500
-                     and month(tgl_jurnal)='$tgl[1]' and year(tgl_jurnal)='$tgl[0]' ")
+                     
+                     ")
             ->result();
 
         $retur_pembelian
@@ -123,11 +130,11 @@ class jurnalModel extends CI_Model
     }
 
 
-    public function neracaSaldo( $tgl = null)
+    public function neracaSaldo($tgl = null)
     {
-    
 
-            $tgl = explode('-', $tgl);
+
+        $tgl = explode('-', $tgl);
         return $this->db->query("select j.kode_coa,c.nama_coa,sum(nominal) as total from jurnal j
                             join coa c on c.kode_coa = j.kode_coa
                             where month(tgl_jurnal)=$tgl[1] and year(tgl_jurnal)=$tgl[0]
@@ -172,7 +179,10 @@ class jurnalModel extends CI_Model
 
     public function labarugi()
     {
-        return $this->db->query("SELECT sum(total) as totalpenjualan, (select sum(total) from beban) as totalbeban from sales")->result();
+        return $this->db->query("SELECT sum(total) as totalpenjualan, 
+            (select sum(total) from beban where nama_beban='beban listrik') as beban_listrik ,
+            (SELECT sum(nominal) as total_pembelian FROM jurnal where kode_coa=500) as total_pembelian
+            from sales")->result();
     }
     public function modal_awal()
     {
@@ -185,9 +195,9 @@ class jurnalModel extends CI_Model
 
 
 
-       public function saldoAwal($tgl=null)
+    public function saldoAwal($tgl = null)
     {
-        if($tgl){
+        if ($tgl) {
 
             $tgl = explode('-', $tgl);
         }
@@ -207,6 +217,4 @@ class jurnalModel extends CI_Model
             'pembelian' =>    $pembelian,
         ];
     }
-
-	
 }

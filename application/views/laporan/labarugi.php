@@ -38,41 +38,41 @@
                 <div class="card-body">
                     <?= $this->session->flashdata("msg") ?>
                     <table class="table">
-                    </div>
-                        <div class="col-md-3">
-                            <input type="month" name="date" id="date" class="form-control">
-                        </div>
-                        <div class="row mb-3">
-                        <div class="col text-center">
-                            <h1>Laba Rugi</h1>
-                            <h3>Apotek Cemerlang</h3>
-                            <h5>Periode:<?= date('M-Y') ?></h5>
-                        </div>
-                    </div>
-    <tr>
-        <td>Penjualan</td>
-        <td>:</td>
-        <td><?= $data[0]->totalpenjualan ?></td>
-    </tr>
-    <tr>
-        <td>Beban</td>
-        <td>:</td>
-        <td><?= $data[0]->totalbeban ?></td>
-    </tr>
-    <tr>
-        <td>laba rugi</td>
-        <td>:</td>
-        <td><?= $data[0]->totalpenjualan-$data[0]->totalbeban?></td>
-    </tr>
-</table>
-
-                  
                 </div>
+                <div class="col-md-3">
+                    <input type="month" name="date" id="date" class="form-control">
+                </div>
+                <div class="row mb-3">
+                    <div class="col text-center">
+                        <h1>Laba Rugi</h1>
+                        <h3>Apotek Cemerlang</h3>
+                        <h5>Periode:<?= date('M-Y') ?></h5>
+                    </div>
+                </div>
+                <tr>
+                    <td>Penjualan</td>
+                    <td>:</td>
+                    <td><?= $data[0]->totalpenjualan ?></td>
+                </tr>
+                <tr>
+                    <td>Beban listrik</td>
+                    <td>:</td>
+                    <td><?= $data[0]->beban_listrik ?></td>
+                </tr>
+                <tr>
+                    <td>total pembelian</td>
+                    <td>:</td>
+                    <td><?= $data[0]->total_pembelian ?></td>
+                </tr>
+                <tr>
+                    <td>laba rugi</td>
+                    <td>:</td>
+                    <td><?= $data[0]->totalpenjualan - $data[0]->beban_listrik - $data[0]->total_pembelian ?></td>
+                </tr>
+                </table>
+
             </div>
         </div>
-        <!-- /.card -->
-
-    </section>
-    <!-- /.content -->
 </div>
-<!-- /.content-wrapper -->
+</section>
+</div>
