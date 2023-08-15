@@ -19,7 +19,8 @@ class penjualanModel extends CI_Model
         return $this->db->insert_id();
     }
 
-    public function MaxId(){
+    public function MaxId()
+    {
         return $this->db->query('SELECT max(id) as id FROM apotek.sales')->result();
     }
 
@@ -31,7 +32,8 @@ class penjualanModel extends CI_Model
     }
 
 
-    public function laporan(){
+    public function laporan()
+    {
         return $this->db->query("select distinct b.date,b.name,
         (select sum(total) as total from apotek.sales where date=b.date and id_drug=b.id_obat)
         as total from(
@@ -41,6 +43,14 @@ class penjualanModel extends CI_Model
         ")->result();
     }
 
+    public function calculateHPP($id_produk)
+    {
+        $total_hpp = 0;
+        foreach ($id_produk as $id) {
+            $hpp = $this->db->query("select max(harga_pembelian) as harga_pembelian from purchase where id_drug=$id")->result()[0]->harga_pembelian;
+            $total_hpp+=$hpp;
+        }
 
-
+        return $total_hpp;
+    }
 }

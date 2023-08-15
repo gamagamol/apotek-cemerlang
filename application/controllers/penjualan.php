@@ -49,12 +49,13 @@ class penjualan extends CI_Controller
 
     public function insert()
     {
-        $harga= $this->input->post("harga_penjualan");
-        $arrHarga=explode('.',$harga);
-        $hrg='';
-        foreach($arrHarga as $h){
-            $hrg.=$h;
-        }
+        // $harga = $this->input->post("harga_penjualan");
+        // // print_r($harga);die;
+        // $arrHarga = explode('.', $harga[]);
+        // $hrg = '';
+        // foreach ($arrHarga as $h) {
+        //     $hrg .= $h;
+        // }
 
         $arrPenjualan = [];
         $totalKeseluruhan = 0;
@@ -69,8 +70,8 @@ class penjualan extends CI_Controller
                 "total" => $this->input->post("total")[$i],
             ];
 
-            $totalKeseluruhan+= $this->input->post("total")[$i];
-            $totalStockKepake+= $this->input->post("arr_jumlah")[$i];
+            $totalKeseluruhan += $this->input->post("total")[$i];
+            $totalStockKepake += $this->input->post("arr_jumlah")[$i];
 
             array_push($arrPenjualan, $penjualan);
         }
@@ -81,23 +82,44 @@ class penjualan extends CI_Controller
 
 
 
-        $arrJurnalDebet = [
-            'kode_coa' => 101,
-            'id_transaksi' => $lastId,
-            'tgl_jurnal' => $this->input->post("date")[0],
-            'nominal' => $totalKeseluruhan,
-            'posisi_dr_cr' => 'debet'
-        ];
-        $arrJurnalKredit = [
-            'kode_coa' => 400,
-            'id_transaksi' => $lastId,
-            'tgl_jurnal' => $this->input->post("date")[0],
-            'nominal' => $totalKeseluruhan,
-            'posisi_dr_cr' => 'kredit'
+        // $arrJurnalDebet = [];
+        // $arrJurnalKredit = [];
+
+
+        $jurnal = [
+            [
+                'kode_coa' => 101,
+                'id_transaksi' => $lastId,
+                'tgl_jurnal' => $this->input->post("date")[0],
+                'nominal' => $totalKeseluruhan,
+                'posisi_dr_cr' => 'debet'
+            ],
+            [
+                'kode_coa' => 400,
+                'id_transaksi' => $lastId,
+                'tgl_jurnal' => $this->input->post("date")[0],
+                'nominal' => $totalKeseluruhan,
+                'posisi_dr_cr' => 'kredit'
+            ],
+            [
+                'kode_coa' => 503,
+                'id_transaksi' => $lastId,
+                'tgl_jurnal' => $this->input->post("date")[0],
+                'nominal' => $this->penjualanModel->calculateHPP($this->input->post("id_drug")),
+                'posisi_dr_cr' => 'debet'
+            ],
+            [
+                'kode_coa' => 102,
+                'id_transaksi' => $lastId,
+                'tgl_jurnal' => $this->input->post("date")[0],
+                'nominal' => $this->penjualanModel->calculateHPP($this->input->post("id_drug")),
+                'posisi_dr_cr' => 'kredit'
+            ],
 
         ];
 
-        $this->jurnalModel->insert($arrJurnalDebet, $arrJurnalKredit);
+
+        $this->jurnalModel->insertJurnal($jurnal);
 
 
         $obat = $this->obatModel->getDrugById((int)$this->input->post("id_drug"));
