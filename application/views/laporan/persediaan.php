@@ -140,10 +140,11 @@
                     unit_total_persedian = []
                     harga_total_persedian = []
                     total_persedian = []
+
                     if (data.length > 0) {
                         data.map((d) => {
                             html += `<tr>`
-                            if (d.nama_coa == 'pembelian') {
+                            if (d.nama_coa == 'persediaan obat') {
                                 html += `<td> ${no}</td>`
                                 html += `<td> ${d.nama_coa}</td>`
                                 html += `<td> ${d.qty}</td>`
@@ -180,11 +181,11 @@
 
                                 // perhitungan
                                 for (let i = 0; i < unit_total_persedian.length; i++) {
-
                                     if (unit_total_persedian[i] != 0) {
                                         unit_total_persedian[i] = unit_total_persedian[i] -= d.qty
-                                        harga_total_persedian[i] = harga_total_persedian[i] * unit_total_persedian[i]
-                                        break
+                                        harga_total_persedian[i] = harga_total_persedian[i]
+                                        total_persedian[i] = unit_total_persedian[i] * harga_total_persedian[i]
+                                        // break
                                     }
                                 }
 
@@ -193,8 +194,8 @@
 
                                 html += `<td>${unit_total_persedian.map((u)=>`${u}<br>`)}</td>`
                                 html += `<td>${harga_total_persedian.map((u)=>`${u}<br>`)}</td>`
-                              
-                                html += `<td>${total_persedian.map((u)=>`${u}<br>`)}</td>`
+
+                                html += `<td>${(unit_total_persedian!=0)?total_persedian.map((u)=>`${u}<br>`):0}</td>`
                             } else if (d.nama_coa == 'retur pembelian') {
                                 unit = parseInt(d.qty)
                                 total = parseInt(d.total)
@@ -223,12 +224,12 @@
                                 }
 
 
-                           
+
 
 
                                 html += `<td>${unit_total_persedian.map((u)=>`${u}<br>`)}</td>`
                                 html += `<td>${harga_total_persedian.map((u)=>`${new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 3 }).format(u)}<br>`)}</td>`
-                      
+
 
                                 html += `<td>${total_persedian.map((u)=>`${new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 3 }).format(u)}<br>`)}</td>`
 
@@ -238,6 +239,8 @@
                             no++
                         })
                     }
+
+
                     $('#tBodytable').html(html)
                 }
             })

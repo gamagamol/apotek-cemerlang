@@ -141,7 +141,6 @@
     <!-- /.modal-dialog -->
 </div>
 
-<<<<<<< HEAD
 <!-- <script>
     $(document).ready(function() {
         $('#tambah').click(function() {
@@ -149,5 +148,3 @@
         })
     })
 </script> -->
-=======
->>>>>>> 5cc9b4a14e17f48d8ed98fc95af4250b124a4f09

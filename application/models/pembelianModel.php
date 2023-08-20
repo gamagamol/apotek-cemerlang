@@ -8,7 +8,7 @@ class pembelianModel extends CI_Model
     {
 
 
-        return $this->db->query('select purchase.id,nota_num,date,d.name,harga_pembelian,qty,total from purchase
+        return $this->db->query('select purchase.id,nota_num,date,d.name,harga_pembelian,qty,total,tgl_kadaluarsa from purchase
                                 join drugs d on d.id = purchase.id_drug')->result();
     }
     public function insert($data)

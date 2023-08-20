@@ -194,19 +194,19 @@
 
                 html += `
                 <td hidden>
-                <input type="text" class="form-control" name="nota_num[]" id='arr_nota_num' required value='${nota_num}' readonly hidden>
+                <input type="text" class="form-control" name="arr_nota_num[]" id='arr_nota_num' required value='${nota_num}' readonly hidden>
                 </td>
                 
                 `
                 html += `
                 <td>
-                <input type="date" class="form-control" name="date[]" id='arr_date' required value='${date}' readonly>
+                <input type="date" class="form-control" name="arr_date[]" id='arr_date' required value='${date}' readonly>
                 </td>
                 
                 `
                 html += `
                 <td>
-                <input type="text" class="form-control" name="id_drug[]" id='arr_id_drug'required value='${id_drug}' hidden>
+                <input type="text" class="form-control" name="arr_id_drug[]" id='arr_id_drug'required value='${id_drug}' hidden>
                 <input type="text" class="form-control"  value='${nama_obat}' readonly >
                 </td>
                 
@@ -215,7 +215,7 @@
                 html += `
                 <td>
 
-                <input type="text" class="form-control" name="jumlah[]" id='arr_jumlah' required value='${jumlah}' readonly>
+                <input type="text" class="form-control" name="arr_jumlah[]" id='arr_jumlah' required value='${jumlah}' readonly>
                 </td>
                 
                 `
@@ -223,7 +223,7 @@
                 html += `
                 <td>
 
-                <input type="text" class="form-control" name="harga_penjualan[]" id='arr_harga_penjualan' required value='${harga_penjualan}' readonly>
+                <input type="text" class="form-control" name="arr_harga_penjualan[]" id='arr_harga_penjualan' required value='${harga_penjualan}' readonly>
                 </td>
                 
                 `
@@ -232,7 +232,7 @@
                 html += `
                 <td>
 
-                <input type="text" class="form-control" name="total[]" id='arr_total' required value='${total}' readonly>
+                <input type="text" class="form-control" name="arr_total[]" id='arr_total' required value='${total}' readonly>
                 </td>
                 
                 `

@@ -55,19 +55,35 @@
                     <td><?= $data[0]->totalpenjualan ?></td>
                 </tr>
                 <tr>
-                    <td>Beban listrik</td>
-                    <td>:</td>
-                    <td><?= $data[0]->beban_listrik ?></td>
-                </tr>
-                <tr>
-                    <td>total pembelian</td>
+                    <td>HPP</td>
                     <td>:</td>
                     <td><?= $data[0]->total_pembelian ?></td>
                 </tr>
                 <tr>
+                    <td>Beban Listk</td>
+                    <td>:</td>
+                    <td><?= $data[0]->beban_listrik ?></td>
+                </tr>
+                <tr>
+                    <td>Beban Air</td>
+                    <td>:</td>
+                    <td><?= $data[0]->beban_air ?></td>
+                </tr>
+                <tr>
+                    <td>Beban Gaji</td>
+                    <td>:</td>
+                    <td><?= $data[0]->beban_gaji ?></td>
+                </tr>
+                </tr>
+                <tr>
+                    <td>Beban Perlengkapan</td>
+                    <td>:</td>
+                    <td><?= $data[0]->beban_perlengkapan ?></td>
+                </tr>
+                <tr>
                     <td>laba rugi</td>
                     <td>:</td>
-                    <td><?= $data[0]->totalpenjualan - $data[0]->beban_listrik - $data[0]->total_pembelian ?></td>
+                    <td><?= $data[0]->totalpenjualan - $data[0]->total_pembelian - $data[0]->beban_listrik - $data[0]->beban_air - $data[0]->beban_gaji  - $data[0]->beban_perlengkapan ?></td>
                 </tr>
                 </table>
 

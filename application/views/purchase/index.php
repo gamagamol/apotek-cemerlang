@@ -51,6 +51,7 @@
                                 <th>No.</th>
                                 <th>No Nota</th>
                                 <th>Tgl Transaksi</th>
+                                <th>Tgl Kadaluarsa</th>
                                 <th>Nama Obat</th>
                                 <th>Harga Obat</th>
                                 <th>Jumlah Pembelian</th>
@@ -65,6 +66,7 @@
                                     <td><?= $no ?></td>
                                     <td> <?= $d->nota_num ?> </td>
                                     <td> <?= $d->date ?> </td>
+                                    <td> <?= $d->tgl_kadaluarsa ?> </td>
                                     <td> <?= $d->name ?> </td>
                                     <td><?= 'Rp' . number_format($d->harga_pembelian,3) ?></td>
                                     <td> <?= $d->qty ?> </td>

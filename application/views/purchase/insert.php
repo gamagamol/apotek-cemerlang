@@ -49,7 +49,7 @@
                             <div>
                                 <div class="form-group">
                                     <label for="addnama_obat">Tanggal Pembelian</label>
-                                    <input type="date" class="form-control" name="date" id='date' required>
+                                    <input type="date" class="form-control" name="date" id='date' value="<?= date('Y-m-d') ?>" readonly required>
                                 </div>
 
                             </div>
@@ -71,15 +71,24 @@
                                 <div class="form-group">
                                     <label for="addsatuan">Nama Obat</label>
 
-                                    
+
                                     <select name="id_drug" id="id_drug" class="form-control">
-                                    <option value="">Pilih Obat</option>
-                                    <?php foreach ($obat as $b) : ?>
-                                        <option value="<?= $b->id_obat ?>"><?= $b->name ?></option>
-                                    <?php endforeach; ?>
+                                        <option value="">Pilih Obat</option>
+                                        <?php foreach ($obat as $b) : ?>
+                                            <option value="<?= $b->id_obat ?>"><?= $b->name ?></option>
+                                        <?php endforeach; ?>
 
 
                                     </select>
+                                </div>
+
+                            </div>
+
+
+                            <div>
+                                <div class="form-group">
+                                    <label for="stock">Tanggal Kadaluarsa</label>
+                                    <input type="date" class="form-control" name="tgl_kadaluarsa" id="tgl_kadaluarsa">
                                 </div>
 
                             </div>
@@ -125,6 +134,7 @@
                             <thead>
                                 <tr>
                                     <td>Tanggal Obat</td>
+                                    <td>Tanggal kadaluarsa</td>
                                     <td>Nama Obat</td>
                                     <td>Qty</td>
                                     <td>harga</td>
@@ -206,6 +216,7 @@
                 let id_drug = $('#id_drug').val()
                 let nama_obat = $('#id_drug option:selected').text()
                 let harga_pembelian = $('#harga').val()
+                let tgl_kadaluarsa = $('#tgl_kadaluarsa').val()
 
 
                 html = ``
@@ -215,19 +226,25 @@
 
                 html += `
                 <td hidden>
-                <input type="text" class="form-control" name="nota_num[]" id='arr_nota_num' required value='${nota_num}' readonly hidden>
+                <input type="text" class="form-control" name="arr_nota_num[]" id='arr_nota_num' required value='${nota_num}' readonly hidden>
                 </td>
                 
                 `
                 html += `
                 <td>
-                <input type="date" class="form-control" name="date[]" id='arr_date' required value='${date}' readonly>
+                <input type="date" class="form-control" name="arr_date[]" id='arr_date' required value='${date}' readonly>
                 </td>
                 
                 `
                 html += `
                 <td>
-                <input type="text" class="form-control" name="id_drug[]" id='arr_id_drug'required value='${id_drug}' hidden>
+                <input type="date" class="form-control" name="arr_tgl_kadaluarsa[]" id='arr_tgl_kadaluarsa' required value='${tgl_kadaluarsa}' readonly>
+                </td>
+                
+                `
+                html += `
+                <td>
+                <input type="text" class="form-control" name="arr_id_drug[]" id='arr_id_drug'required value='${id_drug}' hidden>
                 <input type="text" class="form-control"  value='${nama_obat}' readonly >
                 </td>
                 
@@ -236,7 +253,7 @@
                 html += `
                 <td>
 
-                <input type="text" class="form-control" name="jumlah[]" id='arr_jumlah' required value='${jumlah}' readonly>
+                <input type="text" class="form-control" name="arr_jumlah[]" id='arr_jumlah' required value='${jumlah}' readonly>
                 </td>
                 
                 `
@@ -244,7 +261,7 @@
                 html += `
                 <td>
 
-                <input type="text" class="form-control" name="harga_pembelian[]" id='arr_harga_pembelian' required value='${harga_pembelian}' readonly>
+                <input type="text" class="form-control" name="arr_harga_pembelian[]" id='arr_harga_pembelian' required value='${harga_pembelian}' readonly>
                 </td>
                 
                 `
@@ -253,7 +270,7 @@
                 html += `
                 <td>
 
-                <input type="text" class="form-control" name="total[]" id='arr_total' required value='${total}' readonly>
+                <input type="text" class="form-control" name="arr_total[]" id='arr_total' required value='${total}' readonly>
                 </td>
                 
                 `
@@ -307,7 +324,7 @@
                     data.data.map((d) => {
                         html += `<option value='${d.id}'>${d.name}</option>`
                     })
-                   
+
 
                     $('#id_drug').html(html)
                 }
@@ -318,4 +335,4 @@
 
 
     })
-</script> 
+</script>

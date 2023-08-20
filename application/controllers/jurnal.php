@@ -132,6 +132,7 @@ class jurnal extends CI_Controller
     {
         $data['title'] = 'Admin | labarugi';
         $data['data'] = $this->jurnalModel->labarugi();
+        // print_r($data['data'][0]);die;
 
         $this->load->view('module/header', $data);
         $this->load->view('laporan/labarugi', $data);

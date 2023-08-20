@@ -47,7 +47,7 @@
                         <div>
                             <div class="form-group">
                                 <label for="addnama_obat">Tanggal Transaksi</label>
-                                <input type="date" class="form-control" name="date" id="date" required>
+                                <input type="date" class="form-control" name="date" id="date" value="<?= date('Y-m-d') ?>" readonly required>
                             </div>
 
                         </div>

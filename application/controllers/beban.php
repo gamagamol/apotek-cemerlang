@@ -135,22 +135,6 @@ class beban extends CI_Controller
 
         ];
 
-        $arrJurnalDebet = [
-            'kode_coa' => 514,
-            'id_transaksi' => $lastId,
-            'tgl_jurnal' => $this->input->post("date")[0],
-            'nominal' => $totalKeseluruhan,
-            'posisi_dr_cr' => 'debet'
-        ];
-        $arrJurnalKredit = [
-            'kode_coa' => 101,
-            'id_transaksi' => $lastId,
-            'tgl_jurnal' => $this->input->post("date")[0],
-            'nominal' => $totalKeseluruhan,
-            'posisi_dr_cr' => 'kredit'
-
-        ];
-
 
         $this->jurnalModel->insert($arrJurnalDebet, $arrJurnalKredit);
 

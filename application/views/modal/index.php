@@ -112,7 +112,7 @@
                     <div>
                         <div class="form-group">
                             <label for="addnama_modal">Tanggal Transaksi</label>
-                            <input type="date" class="form-control" name="date" required>
+                            <input type="date" class="form-control" name="date" value="<?= date('Y-m-d') ?>" readonly required>
                         </div>
 
                     </div>

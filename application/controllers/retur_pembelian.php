@@ -37,10 +37,17 @@ class retur_pembelian extends CI_Controller
         $data['no_pembelian'] = $this->retur_pembelianModel->no_purchase();
 
 
+        if ($data['no_nota']) {
+            $arrNoNota = explode('/', $data['no_nota'][0]->nota_num);
+            $lastId = (int)$arrNoNota[3] + 1;
+        } else {
+            $lastId = 1;
+        }
+        
 
-        $arrNoNota = explode('/', $data['no_nota'][0]->nota_num);
+
+
         $tahun = date('Y');
-        $lastId = (int)$arrNoNota[3] + 1;
         $data['no_nota'] = "cemerlang/returpembelian/$tahun/$lastId";
 
         $this->load->view('module/header', $data);
@@ -54,17 +61,27 @@ class retur_pembelian extends CI_Controller
         $totalKeseluruhan = 0;
         $totalStockKepake = 0;
         for ($i = 0; $i < count($this->input->post("nota_num")); $i++) {
+
+
+
+            $harga = $this->input->post("harga_retur_pembelian")[$i];
+            $arrHarga = explode('.', $harga);
+            $hrg = '';
+            foreach ($arrHarga as $h) {
+                $hrg .= $h;
+            }
+
             $Returpembelian = [
                 "nota_num" => $this->input->post("nota_num")[$i],
                 "id_drug" => $this->input->post("id_drug")[$i],
                 "date" => $this->input->post("date")[$i],
                 "qty" => $this->input->post("arr_jumlah")[$i],
-                "harga_retur_pembelian" => $this->input->post("harga_retur_pembelian")[$i],
+                "harga_retur_pembelian" => $hrg,
                 "total" => $this->input->post("total")[$i],
             ];
 
             // print_r($Returpembelian);die;
-        
+
 
             $totalKeseluruhan += $this->input->post("total")[$i];
             $totalStockKepake += $this->input->post("arr_jumlah")[$i];
@@ -130,7 +147,7 @@ class retur_pembelian extends CI_Controller
 
     public function findPurchase()
     {
-        $no_pembelian=$this->input->post('no_pembelian');
+        $no_pembelian = $this->input->post('no_pembelian');
         echo json_encode($this->retur_pembelianModel->findPurchase($no_pembelian));
     }
 }
