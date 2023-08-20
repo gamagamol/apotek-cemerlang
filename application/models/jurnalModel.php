@@ -141,7 +141,7 @@ class jurnalModel extends CI_Model
     public function neracaSaldo($tgl = null)
     {
         $tgl = explode('-', $tgl);
-        return $this->db->query("select nama_coa,sum(nominal) as total,posisi_dr_cr FROM apotek.jurnal j
+        return $this->db->query("SELECT nama_coa,sum(nominal) as total,posisi_dr_cr FROM apotek.jurnal j
         join apotek.coa c on j.kode_coa= c.kode_coa
         where c.kode_coa=401
         group by nama_coa,posisi_dr_cr
